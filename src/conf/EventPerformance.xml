@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsol:experiment 
+	xmlns:dsol="http://www.simulation.tudelft.nl"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <name>DSOL tutorial example section 2.5</name>
+  <analyst>Peter H.M. Jacobs</analyst>
+  <model>
+	   <model-class>nl.tudelft.simulation.dsol.tutorial.appendix.EventPerformance</model-class>
+       <class-path>
+           <jar-file>file:/c:/tutorial.jar</jar-file>
+       </class-path>
+  </model>
+  <treatment>  
+    <startTime>2004-09-01T00:00:00</startTime>
+    <timeUnit>MINUTE</timeUnit> 
+    <runControl>  	    
+	   <warmupPeriod  unit="MINUTE">0</warmupPeriod>    
+	   <runLength unit="HOUR">1000</runLength>
+	   <replication description="replication 0">
+     	   	<stream name="default" seed="99"/>
+	   </replication>
+   </runControl>
+ </treatment>
+</dsol:experiment>	  

@@ -1,0 +1,46 @@
+<uml>
+   <greenVersion="30500"/>
+   <type>
+      <name="=AgroSim/src<control.statemachine{State.java[State"/>
+      <height="423"/>
+      <width="353"/>
+      <x="275"/>
+      <y="95"/>
+   </type>
+   <type>
+      <name="=AgroSim/src<control.statemachine{State.java[State[Transition"/>
+      <height="135"/>
+      <width="229"/>
+      <x="717"/>
+      <y="132"/>
+   </type>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyIPart"/>
+      <sourceType="=AgroSim/src<control.statemachine{State.java[State"/>
+      <targetType="=AgroSim/src<control.statemachine{State.java[State[Transition"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyLPart"/>
+      <sourceType="=AgroSim/src<control.statemachine{State.java[State"/>
+      <targetType="=AgroSim/src<control.statemachine{State.java[State[Transition"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <type>
+      <name="=AgroSim/src<control.statemachine{TransitionCondition.java[TransitionCondition"/>
+      <height="-1"/>
+      <width="-1"/>
+      <x="667"/>
+      <y="30"/>
+   </type>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
+      <sourceType="=AgroSim/src<control.statemachine{State.java[State[Transition"/>
+      <targetType="=AgroSim/src<control.statemachine{TransitionCondition.java[TransitionCondition"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+</uml>
+
