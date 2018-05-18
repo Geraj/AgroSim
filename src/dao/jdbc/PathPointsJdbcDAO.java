@@ -22,31 +22,11 @@ import dao.PathPointsDAO;
 public class PathPointsJdbcDAO implements PathPointsDAO {
 	static Logger logger = Logger.getLogger(PathPointsJdbcDAO.class);
 
-	public Connection Connect() throws DbException {
-		Connection connection = null;
-		try {
-			// Create a connection to the database
-			String serverName = "localhost";
-			String mydatabase = "allamvizsga";
-			String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a
-			// JDBC
-			String username = "root";
-			String password = "";
-			connection = DriverManager.getConnection(url, username, password);
-			// System.out.println("connected to dbf");
-
-		} catch (Exception e) {
-			/*logger.error(e.getMessage(), e);*/ logger.error(e.getMessage());
-			throw new DbException("Could not connect to DB!");
-		}
-		return connection;
-	}
-
 	@Override
 	public void insertPathPointsFromPositionArray(int pathid,
 			List<Position> posAL) throws DbException {
 
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		int id = getMaxIdFromPathPoints() + 1;
 		try {
 			Statement st = connection.createStatement();
@@ -115,7 +95,7 @@ public class PathPointsJdbcDAO implements PathPointsDAO {
 	}
 
 	private int getMaxIdFromPathPoints() throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		int id = -1;
 		try {
 			String sql = "Select max(ID) from pathpoints";
@@ -144,7 +124,7 @@ public class PathPointsJdbcDAO implements PathPointsDAO {
 	public ArrayList<PathPoints> getPathPointsByPathID(int pathID)
 			throws DbException {
 		ArrayList<PathPoints> pointsAL = new ArrayList<PathPoints>();
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			String sql = "SELECT * FROM pathpoints where PathID=" + pathID;
 			PreparedStatement prest = connection.prepareStatement(sql);
@@ -173,7 +153,7 @@ public class PathPointsJdbcDAO implements PathPointsDAO {
 	@Override
 	public Set<Integer> getPositionsPathID(Position position)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		Set<Integer> AL = new TreeSet<Integer>();
 		int id = -1;
 		try {

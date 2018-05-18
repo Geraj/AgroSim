@@ -16,28 +16,9 @@ import dao.PlantsDAO;
 public class PlantsJdbcDAO implements PlantsDAO {
 	static Logger logger = Logger.getLogger(PlantsJdbcDAO.class);
 
-	public Connection Connect() throws DbException {
-		Connection connection = null;
-		try {
-			// Create a connection to the database
-			String serverName = "localhost";
-			String mydatabase = "allamvizsga";
-			String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a
-			// JDBC
-			String username = "root";
-			String password = "";
-			connection = DriverManager.getConnection(url, username, password);
-
-		} catch (Exception e) {
-			/*logger.error(e.getMessage(), e);*/ logger.error(e.getMessage());
-			throw new DbException("Could not connect to DB!");
-		}
-		return connection;
-	}
-
 	@Override
 	public Plants getPlantByID(int id) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			String sql = "SELECT * FROM plants where ID=" + id;
 			PreparedStatement prest = connection.prepareStatement(sql);
@@ -63,7 +44,7 @@ public class PlantsJdbcDAO implements PlantsDAO {
 
 	@Override
 	public ArrayList<Plants> getAllPlants() throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		ArrayList<Plants> plantslAL = new ArrayList<Plants>();
 		try {
 			String sql = "SELECT * from plants";
@@ -91,7 +72,7 @@ public class PlantsJdbcDAO implements PlantsDAO {
 
 	@Override
 	public void insertPlant(Plants plant) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("INSERT INTO plants (Type,Seed,Income) VALUES (?,?,?)");
@@ -116,7 +97,7 @@ public class PlantsJdbcDAO implements PlantsDAO {
 
 	@Override
 	public void deletePlantByType(String type) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			int id = getPlantsIDbyType(type);
 			if (id != 0) {
@@ -147,7 +128,7 @@ public class PlantsJdbcDAO implements PlantsDAO {
 	@Override
 	public void updatePlant(String oldType, Plants plant) throws DbException {
 
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			String sql = "Update plants set Type='" + plant.getType()
 					+ "', Seed=" + plant.getSeed() + ", Income="
@@ -170,7 +151,7 @@ public class PlantsJdbcDAO implements PlantsDAO {
 
 	public int getPlantsIDbyType(String name) throws DbException {
 		int id = 0;
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("SELECT ID FROM plants where Type=?");

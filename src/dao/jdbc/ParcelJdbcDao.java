@@ -18,28 +18,9 @@ import dao.PointsDAO;
 public class ParcelJdbcDao implements ParcelDAO {
 	static Logger logger = Logger.getLogger(ParcelJdbcDao.class);
 
-	public Connection Connect() throws DbException {
-		Connection connection = null;
-		try {
-			// Create a connection to the database
-			String serverName = "localhost";
-			String mydatabase = "allamvizsga";
-			String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a
-			// JDBC
-			String username = "root";
-			String password = "";
-			connection = DriverManager.getConnection(url, username, password);
-
-		} catch (Exception e) {
-			/*logger.error(e.getMessage(), e);*/ logger.error(e.getMessage());
-			throw new DbException("Could not connect to DB!");
-		}
-		return connection;
-	}
-
 	@Override
 	public int getMaxIdFromParcel() throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		int id = 0;
 		try {
 			String sql = "Select max(ID) from parcel";
@@ -67,7 +48,7 @@ public class ParcelJdbcDao implements ParcelDAO {
 
 	@Override
 	public ArrayList<Parcel> getAllParcel() throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		ArrayList<Parcel> parcelAL = new ArrayList<Parcel>();
 		try {
 			String sql = "SELECT * FROM parcel";
@@ -96,7 +77,7 @@ public class ParcelJdbcDao implements ParcelDAO {
 	@Override
 	public void insertParcel(Parcel p, List<Position> posAL, int baseID)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			int Parcelid = getMaxIdFromParcel() + 1;
 			PreparedStatement pstmt = connection
@@ -131,7 +112,7 @@ public class ParcelJdbcDao implements ParcelDAO {
 	@Override
 	public Parcel getParcelByID(int id) throws DbException {
 		Parcel parcel = new Parcel();
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			String sql = "SELECT * FROM parcel where ID=" + id;
 			PreparedStatement prest = connection.prepareStatement(sql);
@@ -158,7 +139,7 @@ public class ParcelJdbcDao implements ParcelDAO {
 	@Override
 	public int getParcelIdByName(String name) throws DbException {
 		int id = 0;
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("SELECT ID FROM parcel where Name=?");
@@ -184,7 +165,7 @@ public class ParcelJdbcDao implements ParcelDAO {
 	@Override
 	public ArrayList<Parcel> getAllParcelFromBase(int baseID)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		ArrayList<Parcel> parcelAL = new ArrayList<Parcel>();
 		try {
 			String sql = "SELECT ID,Name,Area,PlantID FROM parcel,baseparcel where parcel.ID=baseparcel.ParcelID and baseparcel.BaseID="
@@ -213,7 +194,7 @@ public class ParcelJdbcDao implements ParcelDAO {
 
 	@Override
 	public int getCountFromparcelsWithBase(int baseID) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		int id = 0;
 		try {
 			String sql = "Select count(*) from parcel,baseparcel where parcel.ID=baseparcel.ParcelID and baseparcel.BaseID="
@@ -242,7 +223,7 @@ public class ParcelJdbcDao implements ParcelDAO {
 
 	@Override
 	public void deleteParcelByName(String name) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			int parcelid = getParcelIdByName(name);
 			DAOFactory df = DAOFactory.getInstance();
@@ -273,7 +254,7 @@ public class ParcelJdbcDao implements ParcelDAO {
 
 	@Override
 	public void updateParcelPlant(int plantID, int parcelID) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			String sql = "Update parcel set PlantID=" + plantID + " where ID="
 					+ parcelID;

@@ -21,25 +21,7 @@ import dao.PathDAO;
 public class BaseJdbcDAO implements BaseDAO {
 	static Logger logger = Logger.getLogger(BaseJdbcDAO.class);
 
-	public Connection Connect() throws DbException {
-		Connection connection = null;
-		try {
-
-			// Create a connection to the database
-			String serverName = "localhost";
-			String mydatabase = "allamvizsga";
-			String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a
-			// JDBC
-			String username = "root";
-			String password = "";
-			connection = DriverManager.getConnection(url, username, password);
-
-		} catch (SQLException e) {
-			/*logger.error(e.getMessage(), e);*/ logger.error(e.getMessage());
-			throw new DbException("Could not connect to DB turn server on!!");
-		}
-		return connection;
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -49,7 +31,7 @@ public class BaseJdbcDAO implements BaseDAO {
 	@Override
 	public Base getBaseByID(int id) throws DbException {
 		Base base = new Base();
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			String sql = "SELECT * FROM base where ID=" + id;
 			PreparedStatement prest = connection.prepareStatement(sql);
@@ -80,7 +62,7 @@ public class BaseJdbcDAO implements BaseDAO {
 	 */
 	@Override
 	public ArrayList<Base> getAllBases() throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		ArrayList<Base> baseAL = new ArrayList<Base>();
 		try {
 			String sql = "SELECT * from base";
@@ -113,7 +95,7 @@ public class BaseJdbcDAO implements BaseDAO {
 	 */
 	@Override
 	public void insertBase(Base base) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("INSERT INTO Base (Name,Latitude,Longitude) VALUES (?,?,?)");
@@ -142,7 +124,7 @@ public class BaseJdbcDAO implements BaseDAO {
 	 */
 	@Override
 	public void deleteBaseByName(String name) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			int basid = getBaseIdByName(name);
 			DAOFactory df = DAOFactory.getInstance();
@@ -200,7 +182,7 @@ public class BaseJdbcDAO implements BaseDAO {
 	 */
 	public int getBaseIdByName(String name) throws DbException {
 		int id = 0;
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("SELECT ID FROM base where Name=?");

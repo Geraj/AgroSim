@@ -16,28 +16,10 @@ import dao.OperationsDAO;
 public class OperationsJdbcDAO implements OperationsDAO {
 	static Logger logger = Logger.getLogger(OperationsJdbcDAO.class);
 
-	public Connection Connect() throws DbException {
-		Connection connection = null;
-		try {
-			// Create a connection to the database
-			String serverName = "localhost";
-			String mydatabase = "allamvizsga";
-			String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a
-			// JDBC
-			String username = "root";
-			String password = "";
-			connection = DriverManager.getConnection(url, username, password);
-
-		} catch (Exception e) {
-			/*logger.error(e.getMessage(), e);*/ logger.error(e.getMessage());
-			throw new DbException("Could not connect to DB!");
-		}
-		return connection;
-	}
 
 	@Override
 	public void deleteOperationByName(String name) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			int id = getOperationIDbyName(name);
 			String sql = "Delete FROM plantoperation where OperationID=" + id;
@@ -65,7 +47,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 
 	public int getOperationIDbyName(String name) throws DbException {
 		int id = 0;
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("SELECT ID FROM operations where Name=?");
@@ -90,7 +72,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 
 	@Override
 	public ArrayList<Operations> getAllOperations() throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		ArrayList<Operations> operationAL = new ArrayList<Operations>();
 		try {
 			String sql = "SELECT * from operations";
@@ -118,7 +100,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 
 	@Override
 	public void insertOperation(Operations operation) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("INSERT INTO operations (Name,Price,Time) VALUES (?,?,?)");
@@ -143,7 +125,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 	@Override
 	public void updateOperationWithOldname(String oldName, Operations operation)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			String sql = "Update operations set Name='" + operation.getName()
 					+ "', Price=" + operation.getPrice() + ", Time="
@@ -168,7 +150,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 	@Override
 	public void insertPlantOperation(int operationID, int plantID)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("INSERT INTO plantoperation (PlantID,OperationID) VALUES (?,?)");
@@ -192,7 +174,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 	@Override
 	public ArrayList<Operations> getAllOperationsForPlant(int plantID)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		ArrayList<Operations> operationAL = new ArrayList<Operations>();
 		try {
 			String sql = "SELECT operations.id,operations.Name,operations.Price,operations.Time FROM operations, plantoperation WHERE plantoperation.OperationID = operations.ID AND plantoperation.PlantID ="
@@ -221,7 +203,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 
 	public void deleteOperationForPlant(int operationID, int plantID)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			String sql = "Delete FROM plantoperation where OperationID="
 					+ operationID + " and PlantID=" + plantID;
@@ -244,7 +226,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 	@Override
 	public ArrayList<Operations> getAllOperationsForMachine(String machineType)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		ArrayList<Operations> operationAL = new ArrayList<Operations>();
 		try {
 			String sql = "SELECT operations.id,operations.Name,operations.Price,operations.Time FROM operations, machinetypeoperation WHERE machinetypeoperation.OperationID = operations.ID AND machinetypeoperation.MachineType ='"
@@ -274,7 +256,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 	@Override
 	public void insertMachineOperation(int operationID, String machinetype)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("INSERT INTO machinetypeoperation (MachineType,OperationID) VALUES (?,?)");
@@ -300,7 +282,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 	// plantoperation.OperationID=3
 	public boolean doasePlantNeedThisOperation(int plantid, int operationID)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		boolean result = false;
 		try {
 			String sql = "Select count(*) FROM `plantoperation` WHERE plantoperation.PlantID="
@@ -332,7 +314,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 	@Override
 	public void deleteOperationForMachineType(int operationID,
 			String MachineType) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			String sql = "Delete FROM machinetypeoperation where OperationID="
 					+ operationID + " and MachineType='" + MachineType + "'";
@@ -354,7 +336,7 @@ public class OperationsJdbcDAO implements OperationsDAO {
 
 	@Override
 	public Operations getOperationByID(int operationID) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		Operations o = new Operations();
 		try {
 			PreparedStatement pstmt = connection

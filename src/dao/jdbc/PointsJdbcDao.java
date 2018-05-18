@@ -20,32 +20,11 @@ import dao.PointsDAO;
 public class PointsJdbcDao implements PointsDAO {
 	static Logger logger = Logger.getLogger(PointsJdbcDao.class);
 
-	public Connection Connect() throws DbException {
-		Connection connection = null;
-		try {
-			// Create a connection to the database
-			String serverName = "localhost";
-			String mydatabase = "allamvizsga";
-			String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a
-			// JDBC
-			String username = "root";
-			String password = "";
-			connection = DriverManager.getConnection(url,
-					username, password);
-			// System.out.println("connected to dbf");
-
-		} catch (Exception e) {
-			/*logger.error(e.getMessage(), e);*/ logger.error(e.getMessage());
-			throw new DbException("Could not connect to DB!");
-		}
-		return connection;
-	}
-
 	@Override
 	public ArrayList<Points> getPointsByParcelID(int parcelID)
 			throws DbException {
 		ArrayList<Points> pointsAL = new ArrayList<Points>();
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			String sql = "SELECT * FROM points where ParcelID=" + parcelID;
 			PreparedStatement prest = connection.prepareStatement(sql);
@@ -106,7 +85,7 @@ public class PointsJdbcDao implements PointsDAO {
 	}
 
 	public int getMaxIdFromPoints() throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		int id = -1;
 		try {
 			String sql = "Select max(ID) from points";
@@ -133,7 +112,7 @@ public class PointsJdbcDao implements PointsDAO {
 
 	@Override
 	public int getPositionsParcelID(Position position) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		int id = -1;
 		try {
 
@@ -164,7 +143,7 @@ public class PointsJdbcDao implements PointsDAO {
 	@Override
 	public void insertPointsFromPositionArray(int parcelid, List<Position> posAL)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		int id = getMaxIdFromPoints() + 1;
 		try {
 			Statement st = connection.createStatement();
@@ -200,7 +179,7 @@ public class PointsJdbcDao implements PointsDAO {
 	}
 
 	public void deletePiontsWithParcelID(int id) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			String sql = "Delete from points where ParcelID=" + id;
 			PreparedStatement prest = connection.prepareStatement(sql);

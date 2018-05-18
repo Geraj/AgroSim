@@ -13,24 +13,6 @@ import dao.MachinesDAO;
 public class MachinesJdbcDAO implements MachinesDAO {
 	static Logger logger = Logger.getLogger(MachinesJdbcDAO.class);
 
-	public Connection Connect() throws DbException {
-		Connection connection = null;
-		try {
-			// Create a connection to the database
-			String serverName = "localhost";
-			String mydatabase = "allamvizsga";
-			String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a
-			// JDBC
-			String username = "root";
-			String password = "";
-			connection = DriverManager.getConnection(url, username, password);
-
-		} catch (Exception e) {
-			/*logger.error(e.getMessage(), e);*/ logger.error(e.getMessage());
-			throw new DbException("Could not connect to DB!");
-		}
-		return connection;
-	}
 
 	/**
 	 * Gets machines type by id.
@@ -42,7 +24,7 @@ public class MachinesJdbcDAO implements MachinesDAO {
 	@SuppressWarnings("unused")
 	private String getMachinesTypeByID(String id) throws DbException {
 		String typeid = "";
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("SELECT Type FROM machines where ID=?");
@@ -72,7 +54,7 @@ public class MachinesJdbcDAO implements MachinesDAO {
 	 */
 	@Override
 	public void deleteMachineByID(String id) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			// String type = getMachinesTypeByID(id);
 			PreparedStatement prest = connection
@@ -101,7 +83,7 @@ public class MachinesJdbcDAO implements MachinesDAO {
 	 */
 	@Override
 	public ArrayList<Machines> getAllMachines(int baseID) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		ArrayList<Machines> machinesAL = new ArrayList<Machines>();
 		try {
 			String sql = "SELECT machines.ID,machines.Type,machines.Speed,machines.Workspeed from machines,basemachines where machines.ID=basemachines.MachineID and basemachines.BaseID="
@@ -135,7 +117,7 @@ public class MachinesJdbcDAO implements MachinesDAO {
 	 */
 	@Override
 	public void insertMachine(Machines machine, int baseID) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			PreparedStatement pstmt = connection
 					.prepareStatement("INSERT INTO machines (ID,Type,Speed,WorkSpeed) VALUES (?,?,?,?)");
@@ -171,7 +153,7 @@ public class MachinesJdbcDAO implements MachinesDAO {
 	@Override
 	public void deleteMachineByIDAndBaseID(String name, int currentBase)
 			throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			// String type = getMachinesTypeByID(name);
 			PreparedStatement prest = connection
@@ -205,7 +187,7 @@ public class MachinesJdbcDAO implements MachinesDAO {
 	 */
 	public ArrayList<Machines> getAllMachinesForOperationFromBase(int baseID,
 			int operationID) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		ArrayList<Machines> machinesAL = new ArrayList<Machines>();
 		try {
 			String sql = "SELECT machines.ID, machines.Type, machines.speed, machines.workspeed FROM machines, operations, machinetypeoperation, basemachines WHERE machines.type = machinetypeoperation.MachineType AND operations.ID = machinetypeoperation.OperationID AND basemachines.MachineID = machines.ID AND operations.ID ="
@@ -239,7 +221,7 @@ public class MachinesJdbcDAO implements MachinesDAO {
 	 */
 	@Override
 	public Machines getMachineByID(String id) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		Machines machinesfromdb = new Machines();
 		try {
 			PreparedStatement pstmt = connection
@@ -272,7 +254,7 @@ public class MachinesJdbcDAO implements MachinesDAO {
 	@Override
 	public boolean isMachineSuitableForOperation(int operationID,
 			String machineType) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		int t = 0;
 		try {
 			String sql = "Select count(*) from machinetypeoperation where OperationID="
@@ -306,7 +288,7 @@ public class MachinesJdbcDAO implements MachinesDAO {
 	 */
 	@Override
 	public void updateMachine(Machines m) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();
 		try {
 			String sql = "Update machines set Type='" + m.getType()
 					+ "', speed=" + m.getSpeed() + ", workspeed="

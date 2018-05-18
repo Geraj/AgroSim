@@ -21,27 +21,10 @@ import dao.PathPointsDAO;
 
 public class PathJdbcDAO implements PathDAO{
 	static Logger logger = Logger.getLogger(PathJdbcDAO.class);
-	public Connection Connect() throws DbException{
-		Connection connection=null;
-		try {
-			// Create a connection to the database
-			String serverName = "localhost";
-			String mydatabase = "allamvizsga";
-			String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a
-			// JDBC
-			String username = "root";
-			String password = "";
-			connection= DriverManager.getConnection(url,username, password);
-			
-		} catch (Exception e) {
-			/*logger.error(e.getMessage(), e);*/ logger.error(e.getMessage());
-			throw new DbException("Could not connect to DB!");
-		}
-		return connection;
-	}
+
 	@Override
 	public ArrayList<Path> getAllPathofBase(int baseID) throws DbException {
-		Connection connection=Connect();
+		Connection connection=JDBCHelper.connect();;
 		ArrayList<Path> pathAll=new ArrayList<Path>();
 		try{
 		 	String sql = "SELECT ID,parcelFrom,parcelTO,Length FROM path,basepath where path.ID=basepath.PathID and basepath.BaseID="+baseID;
@@ -71,7 +54,7 @@ public class PathJdbcDAO implements PathDAO{
 
 	@Override
 	public int getMaxIdFromPath() throws DbException {
-		Connection connection=Connect();
+		Connection connection=JDBCHelper.connect();;
 		int id=0;
 		try{
 			String sql="Select max(ID) from path";
@@ -103,7 +86,7 @@ public class PathJdbcDAO implements PathDAO{
 	@Override
 	public Path getPathByID(int id) throws DbException {
 		Path path=new Path();
-		Connection connection=Connect();
+		Connection connection=JDBCHelper.connect();;
 		try{
 		 	String sql = "SELECT * FROM path where ID="+id;
 	        PreparedStatement prest = connection.prepareStatement(sql);
@@ -131,7 +114,7 @@ public class PathJdbcDAO implements PathDAO{
 
 	@Override
 	public void insertPath(Path p, List<Position> posAL,int baseID) throws DbException {
-		Connection connection=Connect();
+		Connection connection=JDBCHelper.connect();;
 		try{
 			int pathID=getMaxIdFromPath()+1;
 	        Statement st = connection.createStatement();
@@ -172,7 +155,7 @@ public class PathJdbcDAO implements PathDAO{
 	
 	@Override
 	public void deletePathWithParcelID(int parcelID) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 			String sql = "Select ID FROM path where parcelFrom="+parcelID+" or parcelTO="+parcelID;
 			PreparedStatement prest = connection.prepareStatement(sql);
@@ -205,7 +188,7 @@ public class PathJdbcDAO implements PathDAO{
 	}
 	@Override
 	public int getCountFromPathsWithBase(int baseID)throws DbException {
-		Connection connection=Connect();
+		Connection connection=JDBCHelper.connect();;
 		int id=0;
 		try{
 			String sql="Select count(*) from path,basepath where path.ID=basepath.PathID and basepath.BaseID="+baseID;
@@ -235,7 +218,7 @@ public class PathJdbcDAO implements PathDAO{
 	}
 	@Override
 	public void deletePathWithPathID(int pathid) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		try {
 				String sql="";
 				
@@ -266,7 +249,7 @@ public class PathJdbcDAO implements PathDAO{
 	@Override
 	public int getPathIDbyConnectedParcelsMinimDistance(int parcelId1,
 			int parcelId2) throws DbException {
-		Connection connection = Connect();
+		Connection connection = JDBCHelper.connect();;
 		int id =-1;
 		try {
 			String sql = "SELECT ID FROM path WHERE parcelFrom="+parcelId1+" and parcelTO="+parcelId2+" order by Length limit 1";
