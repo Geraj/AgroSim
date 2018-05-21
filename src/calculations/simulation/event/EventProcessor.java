@@ -16,5 +16,5 @@ public interface EventProcessor {
    * 
    * @param event
    */
-  void handleEvent(Event event);
+  void handleSimulationEvent(Event event);
 }

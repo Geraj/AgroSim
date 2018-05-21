@@ -3,7 +3,7 @@ package control.observer;
 import java.util.LinkedList;
 /**
  * 
- * TODO DESCRIPTION
+ * Interface for observe pattern for state machine
  * 
  * @author Geraj
  */

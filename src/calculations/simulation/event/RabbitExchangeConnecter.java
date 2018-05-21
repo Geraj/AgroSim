@@ -65,7 +65,7 @@ public class RabbitExchangeConnecter {
       String queueName = channel.queueDeclare().getQueue();
       channel.queueBind(queueName, exchange, "");
 
-      System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+      System.out.println(" [*] Waiting for messages.");
       Consumer consumer = new RabbitMessageConsumer(channel, processor);
       channel.basicConsume(queueName, true, consumer);
     } catch (IOException | TimeoutException e) {

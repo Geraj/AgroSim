@@ -15,7 +15,7 @@ import event.Event;
 import event.EventType;
 
 /**
- * TODO DESCRIPTION
+ * Rabbit mq event processor
  * 
  * @author Geraj
  */
@@ -88,9 +88,9 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
   }
 
   /**
-   * @see calculations.simulation.event.EventProcessor#handleEvent(event.Event)
+   * @see calculations.simulation.event.EventProcessor#handleSimulationEvent(event.Event)
    */
-  public void handleEvent(Event event) {
+  public void handleSimulationEvent(Event event) {
 
 		if (event.getType().equals(EventType.TIME_CHANGE)) {
 			synchronized (timer) {

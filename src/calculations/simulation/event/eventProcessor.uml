@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UMLLabProfile="http:///schemas/UMLLabProfile/NS/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/UMLLabProfile/NS/0 pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile-Annotation_2-UMLLabProfile">
+  <uml:Model xmi:id="_1AC-cFzYEeiZV-LLre50nQ" name="eventProcessor">
+    <eAnnotations xmi:id="_1Es08FzYEeiZV-LLre50nQ" source="http://ns.yatta.de/umllab">
+      <contents xmi:type="ecore:EAnnotation" xmi:id="_1Es08VzYEeiZV-LLre50nQ" source="codegen">
+        <details xmi:id="_1Es08lzYEeiZV-LLre50nQ" key="codegenDirectory" value="/AgroSim/src"/>
+        <details xmi:id="_1gwe0FzYEeiZV-LLre50nQ" key="AssociatedSourceCode" value="/AgroSim/src/calculations/simulation/event/EventProcessor.java;1287032991/1;/AgroSim/src/calculations/simulation/event/RabbitEventProcessor.java;3769629958/1;/AgroSim/src/calculations/simulation/event/RabbitExchangeConnecter.java;3759059950/1;/AgroSim/src/calculations/simulation/event/RabbitMessageConsumer.java;577684778/1;"/>
+      </contents>
+    </eAnnotations>
+    <elementImport xmi:id="_1RLxwVzYEeiZV-LLre50nQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+    </elementImport>
+    <elementImport xmi:id="_1RLxwlzYEeiZV-LLre50nQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#byte"/>
+    </elementImport>
+    <elementImport xmi:id="_1RLxw1zYEeiZV-LLre50nQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+    </elementImport>
+    <elementImport xmi:id="_1RLxxFzYEeiZV-LLre50nQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+    </elementImport>
+    <elementImport xmi:id="_1RLxxVzYEeiZV-LLre50nQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+    </elementImport>
+    <elementImport xmi:id="_1RLxxlzYEeiZV-LLre50nQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+    </elementImport>
+    <elementImport xmi:id="_1RLxx1zYEeiZV-LLre50nQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+    </elementImport>
+    <elementImport xmi:id="_1RLxyFzYEeiZV-LLre50nQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#short"/>
+    </elementImport>
+    <elementImport xmi:id="_1RLxyVzYEeiZV-LLre50nQ">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_1QJP8FzYEeiZV-LLre50nQ" name="calculations">
+      <packagedElement xmi:type="uml:Package" xmi:id="_1QJP8VzYEeiZV-LLre50nQ" name="simulation">
+        <packagedElement xmi:type="uml:Package" xmi:id="_1Ql74VzYEeiZV-LLre50nQ" name="event">
+          <packagedElement xmi:type="uml:Interface" xmi:id="_1RViwFzYEeiZV-LLre50nQ" name="EventProcessor">
+            <ownedComment xmi:id="_1TwkoFzYEeiZV-LLre50nQ">
+              <body>&#xD;
+Interface for processing messages from messaging queue&#xD;
+&#xD;
+@author Geraj</body>
+            </ownedComment>
+            <ownedOperation xmi:id="_1TISgFzYEeiZV-LLre50nQ" name="handleSimulationEvent">
+              <ownedParameter xmi:id="_1TISgVzYEeiZV-LLre50nQ" name="event" type="_1Sh1kFzYEeiZV-LLre50nQ"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_1RfTwFzYEeiZV-LLre50nQ" name="RabbitEventProcessor">
+            <ownedComment xmi:id="_1TxLsFzYEeiZV-LLre50nQ">
+              <body>Rabbit mq event processor&#xD;
+&#xD;
+@author Geraj</body>
+            </ownedComment>
+            <ownedAttribute xmi:id="_1TRcgVzYEeiZV-LLre50nQ" name="listeners" visibility="private" type="_1Sh1klzYEeiZV-LLre50nQ" association="_1T1dIFzYEeiZV-LLre50nQ">
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_1TRcg1zYEeiZV-LLre50nQ" value="new LinkedList&lt;Listener>()"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_1TRchVzYEeiZV-LLre50nQ" name="infrastructureModel" visibility="private" type="_1Srmk1zYEeiZV-LLre50nQ" association="_1T2rQVzYEeiZV-LLre50nQ"/>
+            <ownedAttribute xmi:id="_1TbNcVzYEeiZV-LLre50nQ" name="timer" visibility="private" type="_1Srml1zYEeiZV-LLre50nQ" association="_1T35YVzYEeiZV-LLre50nQ"/>
+            <ownedAttribute xmi:id="_1TbNc1zYEeiZV-LLre50nQ" name="lastCommonTime" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_1TbNdVzYEeiZV-LLre50nQ" name="rabbitExchangeConnector" visibility="private" type="_1RodsFzYEeiZV-LLre50nQ" association="_1T4gcVzYEeiZV-LLre50nQ">
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_1TbNdlzYEeiZV-LLre50nQ" value="new RabbitExchangeConnecter()"/>
+            </ownedAttribute>
+            <interfaceRealization xmi:id="_1TISglzYEeiZV-LLre50nQ" client="_1RfTwFzYEeiZV-LLre50nQ" supplier="_1Srmm1zYEeiZV-LLre50nQ" contract="_1Srmm1zYEeiZV-LLre50nQ"/>
+            <interfaceRealization xmi:id="_1SrmoVzYEeiZV-LLre50nQ" client="_1RfTwFzYEeiZV-LLre50nQ" supplier="_1RViwFzYEeiZV-LLre50nQ" contract="_1RViwFzYEeiZV-LLre50nQ"/>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TbNg1zYEeiZV-LLre50nQ" name="RabbitEventProcessor" specification="_1TISg1zYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TbNhFzYEeiZV-LLre50nQ" name="infrastructureModel" type="_1Srmk1zYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1TbNhVzYEeiZV-LLre50nQ" name="t" type="_1Srml1zYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1TbNhlzYEeiZV-LLre50nQ" type="_1RfTwFzYEeiZV-LLre50nQ" direction="return"/>
+              <language>java</language>
+              <body>this.infrastructureModel = infrastructureModel;&#xD;
+ this.timer = t;&#xD;
+ rabbitExchangeConnector.connect(this);&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TbNh1zYEeiZV-LLre50nQ" name="closeConnection" specification="_1RfTwVzYEeiZV-LLre50nQ">
+              <language>java</language>
+              <body>rabbitExchangeConnector.disconnect();&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TbNiFzYEeiZV-LLre50nQ" name="notifyObservers" specification="_1RfTwlzYEeiZV-LLre50nQ">
+              <language>java</language>
+              <body>for (Listener listener : this.listeners) {&#xD;
+   listener.handleEvent(StateMachineEvents.TICK, new Integer(this.lastCommonTime), this);&#xD;
+ }&#xD;
+&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TthUFzYEeiZV-LLre50nQ" name="registerObserver" specification="_1TISiVzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TthUVzYEeiZV-LLre50nQ" name="listener" type="_1SrmmVzYEeiZV-LLre50nQ"/>
+              <language>java</language>
+              <body>this.listeners.add(listener);&#xD;
+&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TuIYFzYEeiZV-LLre50nQ" name="unRegisterObserver" specification="_1TISjlzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TuIYVzYEeiZV-LLre50nQ" name="listener" type="_1SrmmVzYEeiZV-LLre50nQ"/>
+              <language>java</language>
+              <body>this.listeners.remove(listener);&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TuIYlzYEeiZV-LLre50nQ" name="handleSimulationEvent" specification="_1TISk1zYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TuIY1zYEeiZV-LLre50nQ" name="event" type="_1Sh1kFzYEeiZV-LLre50nQ"/>
+              <language>java</language>
+              <body>if (event.getType().equals(EventType.TIME_CHANGE)) {&#xD;
+			synchronized (timer) {&#xD;
+				boolean handled = false;&#xD;
+				int retryCount = 0;&#xD;
+				while (!handled) {&#xD;
+					int comonTimeonMachines = -1;&#xD;
+					while (comonTimeonMachines &lt; 0 &amp;&amp; comonTimeonMachines != MachineSimulate.time) {&#xD;
+						comonTimeonMachines = timer.getCommonTimeOnMachineThreads();&#xD;
+					}&#xD;
+&#xD;
+					if ((comonTimeonMachines == MachineSimulate.time)) {&#xD;
+						this.lastCommonTime = comonTimeonMachines;&#xD;
+						this.notifyObservers();&#xD;
+						MachineSimulate.time = comonTimeonMachines + 1;&#xD;
+						handled = true;&#xD;
+						// System.out.println(MachineSimulate.time);&#xD;
+					} else {&#xD;
+						if (retryCount > 10) {&#xD;
+							Logger.getLogger(RabbitEventProcessor.class)&#xD;
+									.info(&quot;Time change event not handled after 10 tries&quot;);&#xD;
+							break;&#xD;
+						}&#xD;
+						retryCount += 1;&#xD;
+						//&#xD;
+					}&#xD;
+				}&#xD;
+			}&#xD;
+		}&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedOperation xmi:id="_1RfTwVzYEeiZV-LLre50nQ" name="closeConnection" method="_1TbNh1zYEeiZV-LLre50nQ">
+              <ownedComment xmi:id="_1TxLslzYEeiZV-LLre50nQ">
+                <body>TODO DESCRIPTION</body>
+              </ownedComment>
+            </ownedOperation>
+            <ownedOperation xmi:id="_1RfTwlzYEeiZV-LLre50nQ" name="notifyObservers" method="_1TbNiFzYEeiZV-LLre50nQ"/>
+            <ownedOperation xmi:id="_1TISg1zYEeiZV-LLre50nQ" name="RabbitEventProcessor" method="_1TbNg1zYEeiZV-LLre50nQ">
+              <eAnnotations xmi:id="_1TIShlzYEeiZV-LLre50nQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                <details xmi:id="_1TISh1zYEeiZV-LLre50nQ" key="create"/>
+              </eAnnotations>
+              <ownedComment xmi:id="_1TxLsVzYEeiZV-LLre50nQ">
+                <body>Constructs a new instance.&#xD;
+   * @param infrastructureModel &#xD;
+   * &#xD;
+   * @param t</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_1TIShFzYEeiZV-LLre50nQ" name="infrastructureModel" type="_1Srmk1zYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1TIShVzYEeiZV-LLre50nQ" name="t" type="_1Srml1zYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1TISiFzYEeiZV-LLre50nQ" type="_1RfTwFzYEeiZV-LLre50nQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_1TISiVzYEeiZV-LLre50nQ" name="registerObserver" method="_1TthUFzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TISilzYEeiZV-LLre50nQ" name="listener" type="_1SrmmVzYEeiZV-LLre50nQ"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_1TISjlzYEeiZV-LLre50nQ" name="unRegisterObserver" method="_1TuIYFzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TISj1zYEeiZV-LLre50nQ" name="listener" type="_1SrmmVzYEeiZV-LLre50nQ"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_1TISk1zYEeiZV-LLre50nQ" name="handleSimulationEvent" method="_1TuIYlzYEeiZV-LLre50nQ">
+              <ownedComment xmi:id="_1TxLs1zYEeiZV-LLre50nQ">
+                <body>@see calculations.simulation.event.EventProcessor#handleSimulationEvent(event.Event)</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_1TISlFzYEeiZV-LLre50nQ" name="event" type="_1Sh1kFzYEeiZV-LLre50nQ"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_1RodsFzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter">
+            <ownedComment xmi:id="_1TxLtFzYEeiZV-LLre50nQ">
+              <body>Connecting to rabbit messaging queue exchange&#xD;
+&#xD;
+@author Geraj</body>
+            </ownedComment>
+            <ownedAttribute xmi:id="_1TbNeFzYEeiZV-LLre50nQ" name="EXCHANGE_NAME" visibility="private" isLeaf="true" isStatic="true" isReadOnly="true">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_1TbNeVzYEeiZV-LLre50nQ" value="&quot;event_exchange&quot;"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_1TbNe1zYEeiZV-LLre50nQ" name="exchange" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_1TbNfVzYEeiZV-LLre50nQ" name="host" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_1TbNf1zYEeiZV-LLre50nQ" name="connection" visibility="private" type="_1S0whlzYEeiZV-LLre50nQ" association="_1T5ukVzYEeiZV-LLre50nQ"/>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TuvcFzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter" specification="_1RodsVzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TuvcVzYEeiZV-LLre50nQ" type="_1RodsFzYEeiZV-LLre50nQ" direction="return"/>
+              <language>java</language>
+              <body>exchange = EXCHANGE_NAME;&#xD;
+ host = &quot;localhost&quot;;&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TvWgFzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter" specification="_1RodtVzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TvWgVzYEeiZV-LLre50nQ" name="exchangeName">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_1TvWglzYEeiZV-LLre50nQ" name="host">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_1TvWg1zYEeiZV-LLre50nQ" type="_1RodsFzYEeiZV-LLre50nQ" direction="return"/>
+              <language>java</language>
+              <body>this.exchange = exchangeName;&#xD;
+ this.host = host;&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TvWhFzYEeiZV-LLre50nQ" name="connect" specification="_1S-hgVzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TvWhVzYEeiZV-LLre50nQ" name="processor" type="_1RViwFzYEeiZV-LLre50nQ"/>
+              <language>java</language>
+              <body>ConnectionFactory factory = new ConnectionFactory();&#xD;
+ factory.setHost(host);&#xD;
+ try {&#xD;
+   connection = factory.newConnection();&#xD;
+   Channel channel = connection.createChannel();&#xD;
+   channel.exchangeDeclare(exchange, &quot;fanout&quot;);&#xD;
+   String queueName = channel.queueDeclare().getQueue();&#xD;
+   channel.queueBind(queueName, exchange, &quot;&quot;);&#xD;
+&#xD;
+   System.out.println(&quot; [*] Waiting for messages.&quot;);&#xD;
+   Consumer consumer = new RabbitMessageConsumer(channel, processor);&#xD;
+   channel.basicConsume(queueName, true, consumer);&#xD;
+ } catch (IOException | TimeoutException e) {&#xD;
+   // TODO Add your own exception handling here, consider logging&#xD;
+   e.printStackTrace();&#xD;
+ }&#xD;
+&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1TvWhlzYEeiZV-LLre50nQ" name="disconnect" specification="_1Rodu1zYEeiZV-LLre50nQ">
+              <language>java</language>
+              <body>try {&#xD;
+   connection.close();&#xD;
+ } catch (IOException e) {&#xD;
+   // TODO Add your own exception handling here, consider logging&#xD;
+   e.printStackTrace();&#xD;
+ }&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedOperation xmi:id="_1RodsVzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter" method="_1TuvcFzYEeiZV-LLre50nQ">
+              <eAnnotations xmi:id="_1RodslzYEeiZV-LLre50nQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                <details xmi:id="_1Rods1zYEeiZV-LLre50nQ" key="create"/>
+              </eAnnotations>
+              <ownedComment xmi:id="_1TxLtVzYEeiZV-LLre50nQ">
+                <body>&#xD;
+   * Constructs a new instance.</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_1RodtFzYEeiZV-LLre50nQ" type="_1RodsFzYEeiZV-LLre50nQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_1RodtVzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter" method="_1TvWgFzYEeiZV-LLre50nQ">
+              <eAnnotations xmi:id="_1RoduFzYEeiZV-LLre50nQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                <details xmi:id="_1RoduVzYEeiZV-LLre50nQ" key="create"/>
+              </eAnnotations>
+              <ownedComment xmi:id="_1TxywFzYEeiZV-LLre50nQ">
+                <body>&#xD;
+   * Constructs a new instance.&#xD;
+   * &#xD;
+   * @param exchangeName&#xD;
+   * @param host</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_1RodtlzYEeiZV-LLre50nQ" name="exchangeName">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_1Rodt1zYEeiZV-LLre50nQ" name="host">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_1RodulzYEeiZV-LLre50nQ" type="_1RodsFzYEeiZV-LLre50nQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_1Rodu1zYEeiZV-LLre50nQ" name="disconnect" method="_1TvWhlzYEeiZV-LLre50nQ"/>
+            <ownedOperation xmi:id="_1S-hgVzYEeiZV-LLre50nQ" name="connect" method="_1TvWhFzYEeiZV-LLre50nQ">
+              <ownedComment xmi:id="_1TxywVzYEeiZV-LLre50nQ">
+                <body>&#xD;
+   * Connect to exchange and start to consume&#xD;
+   * @param processor - event processor to use for handling message in the event</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_1S-hglzYEeiZV-LLre50nQ" name="processor" type="_1RViwFzYEeiZV-LLre50nQ"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_1RodvFzYEeiZV-LLre50nQ" name="RabbitMessageConsumer">
+            <ownedComment xmi:id="_1TxywlzYEeiZV-LLre50nQ">
+              <body>Consumes events from rabbitMQ&#xD;
+&#xD;
+@author Geraj</body>
+            </ownedComment>
+            <generalization xmi:id="_1TRcgFzYEeiZV-LLre50nQ" general="_1S-hhVzYEeiZV-LLre50nQ"/>
+            <ownedAttribute xmi:id="_1TbNgVzYEeiZV-LLre50nQ" name="processor" visibility="private" type="_1RViwFzYEeiZV-LLre50nQ" association="_1T6VoVzYEeiZV-LLre50nQ"/>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1Tv9kFzYEeiZV-LLre50nQ" name="RabbitMessageConsumer" specification="_1TRccFzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1Tv9kVzYEeiZV-LLre50nQ" name="channel" type="_1S0whFzYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1Tv9klzYEeiZV-LLre50nQ" name="processor" type="_1RViwFzYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1Tv9k1zYEeiZV-LLre50nQ" type="_1RodvFzYEeiZV-LLre50nQ" direction="return"/>
+              <language>java</language>
+              <body>super(channel);&#xD;
+ this.processor = processor;&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1Tv9lFzYEeiZV-LLre50nQ" name="handleDelivery" specification="_1TRcdlzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1Tv9lVzYEeiZV-LLre50nQ" name="consumerTag">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_1Tv9llzYEeiZV-LLre50nQ" name="envelope" type="_1S-hh1zYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1Tv9l1zYEeiZV-LLre50nQ" name="properties" type="_1S-hi1zYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1Tv9mFzYEeiZV-LLre50nQ" name="body">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#byte"/>
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1Tv9mVzYEeiZV-LLre50nQ" value="*"/>
+              </ownedParameter>
+              <language>java</language>
+              <body>Event o = EventSerializationUtil.createEventFromByteArray(body);&#xD;
+ System.out.println(&quot; [x] Received '&quot; + o + &quot;'&quot;);&#xD;
+ processor.handleSimulationEvent(o);&#xD;
+ // TODO process event&#xD;
+  </body>
+            </ownedBehavior>
+            <ownedOperation xmi:id="_1TRccFzYEeiZV-LLre50nQ" name="RabbitMessageConsumer" method="_1Tv9kFzYEeiZV-LLre50nQ">
+              <eAnnotations xmi:id="_1TRcc1zYEeiZV-LLre50nQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                <details xmi:id="_1TRcdFzYEeiZV-LLre50nQ" key="create"/>
+              </eAnnotations>
+              <ownedComment xmi:id="_1Txyw1zYEeiZV-LLre50nQ">
+                <body>Constructs a new instance.&#xD;
+   * @param channel</body>
+              </ownedComment>
+              <ownedParameter xmi:id="_1TRccVzYEeiZV-LLre50nQ" name="channel" type="_1S0whFzYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1TRcclzYEeiZV-LLre50nQ" name="processor" type="_1RViwFzYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1TRcdVzYEeiZV-LLre50nQ" type="_1RodvFzYEeiZV-LLre50nQ" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_1TRcdlzYEeiZV-LLre50nQ" name="handleDelivery" method="_1Tv9lFzYEeiZV-LLre50nQ" raisedException="_1S0wgFzYEeiZV-LLre50nQ">
+              <ownedParameter xmi:id="_1TRcd1zYEeiZV-LLre50nQ" name="consumerTag">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_1TRceFzYEeiZV-LLre50nQ" name="envelope" type="_1S-hh1zYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1TRceVzYEeiZV-LLre50nQ" name="properties" type="_1S-hi1zYEeiZV-LLre50nQ"/>
+              <ownedParameter xmi:id="_1TRcelzYEeiZV-LLre50nQ" name="body">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#byte"/>
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1TRcfFzYEeiZV-LLre50nQ" value="*"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_1T1dIFzYEeiZV-LLre50nQ" name="" memberEnd="_1T1dIVzYEeiZV-LLre50nQ _1TRcgVzYEeiZV-LLre50nQ">
+            <ownedEnd xmi:id="_1T1dIVzYEeiZV-LLre50nQ" name="" type="_1RfTwFzYEeiZV-LLre50nQ" association="_1T1dIFzYEeiZV-LLre50nQ"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_1T2rQVzYEeiZV-LLre50nQ" name="" memberEnd="_1T2rQlzYEeiZV-LLre50nQ _1TRchVzYEeiZV-LLre50nQ">
+            <ownedEnd xmi:id="_1T2rQlzYEeiZV-LLre50nQ" name="" type="_1RfTwFzYEeiZV-LLre50nQ" association="_1T2rQVzYEeiZV-LLre50nQ"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_1T35YVzYEeiZV-LLre50nQ" name="" memberEnd="_1T35YlzYEeiZV-LLre50nQ _1TbNcVzYEeiZV-LLre50nQ">
+            <ownedEnd xmi:id="_1T35YlzYEeiZV-LLre50nQ" name="" type="_1RfTwFzYEeiZV-LLre50nQ" association="_1T35YVzYEeiZV-LLre50nQ"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_1T4gcVzYEeiZV-LLre50nQ" name="" memberEnd="_1T4gclzYEeiZV-LLre50nQ _1TbNdVzYEeiZV-LLre50nQ">
+            <ownedEnd xmi:id="_1T4gclzYEeiZV-LLre50nQ" name="" type="_1RfTwFzYEeiZV-LLre50nQ" association="_1T4gcVzYEeiZV-LLre50nQ"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_1T5ukVzYEeiZV-LLre50nQ" name="" memberEnd="_1T5uklzYEeiZV-LLre50nQ _1TbNf1zYEeiZV-LLre50nQ">
+            <ownedEnd xmi:id="_1T5uklzYEeiZV-LLre50nQ" name="" type="_1RodsFzYEeiZV-LLre50nQ" association="_1T5ukVzYEeiZV-LLre50nQ"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_1T6VoVzYEeiZV-LLre50nQ" name="" memberEnd="_1T6VolzYEeiZV-LLre50nQ _1TbNgVzYEeiZV-LLre50nQ">
+            <ownedEnd xmi:id="_1T6VolzYEeiZV-LLre50nQ" name="" type="_1RodvFzYEeiZV-LLre50nQ" association="_1T6VoVzYEeiZV-LLre50nQ"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_1SrmlVzYEeiZV-LLre50nQ" name="MachineSimulate"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_1Srml1zYEeiZV-LLre50nQ" name="Timer"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1Srmk1zYEeiZV-LLre50nQ" name="ModelAndGraphBuilder"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_1Ql74FzYEeiZV-LLre50nQ" name="event">
+      <packagedElement xmi:type="uml:Class" xmi:id="_1Sh1kFzYEeiZV-LLre50nQ" name="Event"/>
+      <packagedElement xmi:type="uml:Enumeration" xmi:id="_1Srmn1zYEeiZV-LLre50nQ" name="EventType"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_1Ql74lzYEeiZV-LLre50nQ" name="java">
+      <packagedElement xmi:type="uml:Package" xmi:id="_1Ql741zYEeiZV-LLre50nQ" name="util">
+        <packagedElement xmi:type="uml:Package" xmi:id="_1Q420VzYEeiZV-LLre50nQ" name="concurrent">
+          <packagedElement xmi:type="uml:Class" xmi:id="_1S0wglzYEeiZV-LLre50nQ" name="TimeoutException"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_1Sh1klzYEeiZV-LLre50nQ" name="LinkedList"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_1Q420FzYEeiZV-LLre50nQ" name="io">
+        <packagedElement xmi:type="uml:Class" xmi:id="_1S0wgFzYEeiZV-LLre50nQ" name="IOException"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_1Ql75FzYEeiZV-LLre50nQ" name="org">
+      <packagedElement xmi:type="uml:Package" xmi:id="_1Ql75VzYEeiZV-LLre50nQ" name="apache">
+        <packagedElement xmi:type="uml:Package" xmi:id="_1Ql75lzYEeiZV-LLre50nQ" name="log4j">
+          <packagedElement xmi:type="uml:Class" xmi:id="_1SrmkVzYEeiZV-LLre50nQ" name="Logger"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_1Ql751zYEeiZV-LLre50nQ" name="control">
+      <packagedElement xmi:type="uml:Package" xmi:id="_1Ql76FzYEeiZV-LLre50nQ" name="observer">
+        <packagedElement xmi:type="uml:Interface" xmi:id="_1SrmmVzYEeiZV-LLre50nQ" name="Listener"/>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_1Srmm1zYEeiZV-LLre50nQ" name="Observable"/>
+        <packagedElement xmi:type="uml:Enumeration" xmi:id="_1SrmnVzYEeiZV-LLre50nQ" name="StateMachineEvents"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_1Q420lzYEeiZV-LLre50nQ" name="com">
+      <packagedElement xmi:type="uml:Package" xmi:id="_1Q4201zYEeiZV-LLre50nQ" name="rabbitmq">
+        <packagedElement xmi:type="uml:Package" xmi:id="_1Q421FzYEeiZV-LLre50nQ" name="client">
+          <packagedElement xmi:type="uml:Interface" xmi:id="_1S0whFzYEeiZV-LLre50nQ" name="Channel"/>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_1S0whlzYEeiZV-LLre50nQ" name="Connection"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_1S0wiFzYEeiZV-LLre50nQ" name="ConnectionFactory"/>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_1S0wilzYEeiZV-LLre50nQ" name="Consumer"/>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_1S-hg1zYEeiZV-LLre50nQ" name="AMQP"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_1S-hhVzYEeiZV-LLre50nQ" name="DefaultConsumer"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_1S-hh1zYEeiZV-LLre50nQ" name="Envelope"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_1RLxwFzYEeiZV-LLre50nQ" name="util">
+      <packagedElement xmi:type="uml:Class" xmi:id="_1S-hiVzYEeiZV-LLre50nQ" name="EventSerializationUtil"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_1RLxylzYEeiZV-LLre50nQ" name="AMQP">
+      <packagedElement xmi:type="uml:Class" xmi:id="_1S-hi1zYEeiZV-LLre50nQ" name="BasicProperties"/>
+    </packagedElement>
+    <profileApplication xmi:id="_1Es081zYEeiZV-LLre50nQ">
+      <eAnnotations xmi:id="_1E2l8FzYEeiZV-LLre50nQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile-Annotation_2-UMLLabProfile"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UMLLAB_PROFILES/UMLLab.profile.uml#UMLLabProfile"/>
+    </profileApplication>
+  </uml:Model>
+  <UMLLabProfile:TargetLanguage xmi:id="_1E2l8VzYEeiZV-LLre50nQ" base_Package="_1AC-cFzYEeiZV-LLre50nQ">
+    <languageName>java</languageName>
+  </UMLLabProfile:TargetLanguage>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1RfTw1zYEeiZV-LLre50nQ" base_Element="_1RfTwlzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Annotations xmi:id="_1RfTxFzYEeiZV-LLre50nQ" base_Element="_1RfTwlzYEeiZV-LLre50nQ">
+    <annotations xmi:id="_1RfTxVzYEeiZV-LLre50nQ" name="Override"/>
+  </UMLLabProfile:Annotations>
+  <UMLLabProfile:Reference xmi:id="_1Sh1kVzYEeiZV-LLre50nQ" base_Element="_1Sh1kFzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1SrmkFzYEeiZV-LLre50nQ" base_Element="_1Sh1klzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1SrmklzYEeiZV-LLre50nQ" base_Element="_1SrmkVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1SrmlFzYEeiZV-LLre50nQ" base_Element="_1Srmk1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1SrmllzYEeiZV-LLre50nQ" base_Element="_1SrmlVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1SrmmFzYEeiZV-LLre50nQ" base_Element="_1Srml1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1SrmmlzYEeiZV-LLre50nQ" base_Element="_1SrmmVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1SrmnFzYEeiZV-LLre50nQ" base_Element="_1Srmm1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1SrmnlzYEeiZV-LLre50nQ" base_Element="_1SrmnVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1SrmoFzYEeiZV-LLre50nQ" base_Element="_1Srmn1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S0wgVzYEeiZV-LLre50nQ" base_Element="_1S0wgFzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S0wg1zYEeiZV-LLre50nQ" base_Element="_1S0wglzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S0whVzYEeiZV-LLre50nQ" base_Element="_1S0whFzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S0wh1zYEeiZV-LLre50nQ" base_Element="_1S0whlzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S0wiVzYEeiZV-LLre50nQ" base_Element="_1S0wiFzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S-hgFzYEeiZV-LLre50nQ" base_Element="_1S0wilzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S-hhFzYEeiZV-LLre50nQ" base_Element="_1S-hg1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S-hhlzYEeiZV-LLre50nQ" base_Element="_1S-hhVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S-hiFzYEeiZV-LLre50nQ" base_Element="_1S-hh1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S-hilzYEeiZV-LLre50nQ" base_Element="_1S-hiVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1S-hjFzYEeiZV-LLre50nQ" base_Element="_1S-hi1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TISi1zYEeiZV-LLre50nQ" base_Element="_1TISiVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Annotations xmi:id="_1TISjFzYEeiZV-LLre50nQ" base_Element="_1TISiVzYEeiZV-LLre50nQ">
+    <annotations xmi:id="_1TISjVzYEeiZV-LLre50nQ" name="Override"/>
+  </UMLLabProfile:Annotations>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TISkFzYEeiZV-LLre50nQ" base_Element="_1TISjlzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Annotations xmi:id="_1TISkVzYEeiZV-LLre50nQ" base_Element="_1TISjlzYEeiZV-LLre50nQ">
+    <annotations xmi:id="_1TISklzYEeiZV-LLre50nQ" name="Override"/>
+  </UMLLabProfile:Annotations>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TRce1zYEeiZV-LLre50nQ" base_Element="_1TRcdlzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Array xmi:id="_1TRcfVzYEeiZV-LLre50nQ" base_Element="_1TRcelzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Annotations xmi:id="_1TRcflzYEeiZV-LLre50nQ" base_Element="_1TRcdlzYEeiZV-LLre50nQ">
+    <annotations xmi:id="_1TRcf1zYEeiZV-LLre50nQ" name="Override"/>
+  </UMLLabProfile:Annotations>
+  <UMLLabProfile:Generics xmi:id="_1TRcglzYEeiZV-LLre50nQ" genericsValue="Listener" base_Element="_1TRcgVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TRchFzYEeiZV-LLre50nQ" base_Element="_1TRcgVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TbNcFzYEeiZV-LLre50nQ" base_Element="_1TRchVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TbNclzYEeiZV-LLre50nQ" base_Element="_1TbNcVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TbNdFzYEeiZV-LLre50nQ" base_Element="_1TbNc1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TbNd1zYEeiZV-LLre50nQ" base_Element="_1TbNdVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TbNelzYEeiZV-LLre50nQ" base_Element="_1TbNeFzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TbNfFzYEeiZV-LLre50nQ" base_Element="_1TbNe1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TbNflzYEeiZV-LLre50nQ" base_Element="_1TbNfVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TbNgFzYEeiZV-LLre50nQ" base_Element="_1TbNf1zYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:LegacyStyledElement xmi:id="_1TbNglzYEeiZV-LLre50nQ" base_Element="_1TbNgVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1T2rQFzYEeiZV-LLre50nQ" base_Element="_1T1dIFzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1T35YFzYEeiZV-LLre50nQ" base_Element="_1T2rQVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1T4gcFzYEeiZV-LLre50nQ" base_Element="_1T35YVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1T5ukFzYEeiZV-LLre50nQ" base_Element="_1T4gcVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1T6VoFzYEeiZV-LLre50nQ" base_Element="_1T5ukVzYEeiZV-LLre50nQ"/>
+  <UMLLabProfile:Reference xmi:id="_1T68sFzYEeiZV-LLre50nQ" base_Element="_1T6VoVzYEeiZV-LLre50nQ"/>
+</xmi:XMI>

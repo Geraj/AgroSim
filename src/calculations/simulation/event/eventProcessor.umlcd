@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.diagrams="http://ns.yatta-solutions.com/umllab/diagrams/1.1.0" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_1CE-wFzYEeiZV-LLre50nQ">
+  <modelElement href="eventProcessor.uml#_1Ql74VzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1hI5UVzYEeiZV-LLre50nQ" targetItem="_1hSDQFzYEeiZV-LLre50nQ" sourceItem="_1hI5UFzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:GeneralizationVisual" xmi:id="_1hSDSVzYEeiZV-LLre50nQ" sourceAnchor="745.0,138.0" targetAnchor="52.0,85.0" dashed="true" superClass="_1hSDQFzYEeiZV-LLre50nQ" subClass="_1hb0ZFzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1SrmoVzYEeiZV-LLre50nQ"/>
+    <bendpoints xmi:id="_jtonMFzzEeiZV-LLre50nQ" sourceX="50" targetY="376"/>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1hSDS1zYEeiZV-LLre50nQ" targetItem="_1hb0ZFzYEeiZV-LLre50nQ" sourceItem="_1hSDSlzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1hSDTVzYEeiZV-LLre50nQ" targetItem="_1hb0gVzYEeiZV-LLre50nQ" sourceItem="_1hSDTFzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1hSDT1zYEeiZV-LLre50nQ" targetItem="_1hb0iVzYEeiZV-LLre50nQ" sourceItem="_1hSDTlzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1hSDUVzYEeiZV-LLre50nQ" targetItem="_1hb0pVzYEeiZV-LLre50nQ" sourceItem="_1hSDUFzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_1hb0QFzYEeiZV-LLre50nQ" source="_1hb0ZFzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1T1dIFzYEeiZV-LLre50nQ"/>
+    <stereotypes xmi:id="_1hb0QVzYEeiZV-LLre50nQ" name="Reference">
+      <modelElement href="eventProcessor.uml#_1T2rQFzYEeiZV-LLre50nQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_1hb0QlzYEeiZV-LLre50nQ" text=""/>
+    <sourceRole xmi:id="_1hb0Q1zYEeiZV-LLre50nQ" aggregationKind="NONE" name="">
+      <modelElement href="eventProcessor.uml#_1T1dIVzYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1hb0RFzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0RVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_1hb0RlzYEeiZV-LLre50nQ" aggregationKind="NONE" name="listeners" navigable="true">
+      <modelElement href="eventProcessor.uml#_1TRcgVzYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1hb0R1zYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1hb0SFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_1hb0SVzYEeiZV-LLre50nQ" source="_1hb0ZFzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1T2rQVzYEeiZV-LLre50nQ"/>
+    <stereotypes xmi:id="_1hb0SlzYEeiZV-LLre50nQ" name="Reference">
+      <modelElement href="eventProcessor.uml#_1T35YFzYEeiZV-LLre50nQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_1hb0S1zYEeiZV-LLre50nQ" text=""/>
+    <sourceRole xmi:id="_1hb0TFzYEeiZV-LLre50nQ" aggregationKind="NONE" name="">
+      <modelElement href="eventProcessor.uml#_1T2rQlzYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1hb0TVzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0TlzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_1hb0T1zYEeiZV-LLre50nQ" aggregationKind="NONE" name="infrastructureModel" navigable="true">
+      <modelElement href="eventProcessor.uml#_1TRchVzYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1hb0UFzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1hb0UVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_1hb0UlzYEeiZV-LLre50nQ" source="_1hb0ZFzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1T35YVzYEeiZV-LLre50nQ"/>
+    <stereotypes xmi:id="_1hb0U1zYEeiZV-LLre50nQ" name="Reference">
+      <modelElement href="eventProcessor.uml#_1T4gcFzYEeiZV-LLre50nQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_1hb0VFzYEeiZV-LLre50nQ" text=""/>
+    <sourceRole xmi:id="_1hb0VVzYEeiZV-LLre50nQ" aggregationKind="NONE" name="">
+      <modelElement href="eventProcessor.uml#_1T35YlzYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1hb0VlzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0V1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_1hb0WFzYEeiZV-LLre50nQ" aggregationKind="NONE" name="timer" navigable="true">
+      <modelElement href="eventProcessor.uml#_1TbNcVzYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1hb0WVzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1hb0WlzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_1hb0W1zYEeiZV-LLre50nQ" sourceAnchor="381.0,0.0" targetAnchor="343.0,231.0" target="_1h1c4FzYEeiZV-LLre50nQ" source="_1hb0ZFzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1T4gcVzYEeiZV-LLre50nQ"/>
+    <visualProperties xmi:id="_U6sXUFzzEeiZV-LLre50nQ" position="-399.0,45.0"/>
+    <stereotypes xmi:id="_1hb0XFzYEeiZV-LLre50nQ" name="Reference">
+      <modelElement href="eventProcessor.uml#_1T5ukFzYEeiZV-LLre50nQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_1hb0XVzYEeiZV-LLre50nQ" text="">
+      <visualProperties xmi:id="_1zX40lzYEeiZV-LLre50nQ" position="-82.0,21.0"/>
+    </nameVisual>
+    <sourceRole xmi:id="_1hb0XlzYEeiZV-LLre50nQ" aggregationKind="NONE" name="">
+      <modelElement href="eventProcessor.uml#_1T4gclzYEeiZV-LLre50nQ"/>
+      <visualProperties xmi:id="_1zX40VzYEeiZV-LLre50nQ" position="-18.0,-67.0"/>
+      <visibility xmi:id="_1hb0X1zYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0YFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_1hb0YVzYEeiZV-LLre50nQ" aggregationKind="NONE" name="rabbitExchangeConnector" navigable="true">
+      <modelElement href="eventProcessor.uml#_1TbNdVzYEeiZV-LLre50nQ"/>
+      <visualProperties xmi:id="_1zX401zYEeiZV-LLre50nQ" position="2.0,11.0"/>
+      <visibility xmi:id="_1hb0YlzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1hb0Y1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1huvMVzYEeiZV-LLre50nQ" targetItem="_1h1c4FzYEeiZV-LLre50nQ" sourceItem="_1huvMFzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1huvM1zYEeiZV-LLre50nQ" targetItem="_1h1c91zYEeiZV-LLre50nQ" sourceItem="_1huvMlzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1hyZkFzYEeiZV-LLre50nQ" targetItem="_1h1c_VzYEeiZV-LLre50nQ" sourceItem="_1huvNFzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1hzAoVzYEeiZV-LLre50nQ" targetItem="_1h1dDFzYEeiZV-LLre50nQ" sourceItem="_1hzAoFzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_1h010FzYEeiZV-LLre50nQ" sourceAnchor="449.0,0.0" targetAnchor="182.0,100.0" target="_U6rJMFzzEeiZV-LLre50nQ" source="_1h1c4FzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1T5ukVzYEeiZV-LLre50nQ"/>
+    <visualProperties xmi:id="_U6s-YFzzEeiZV-LLre50nQ" position="-399.0,45.0"/>
+    <stereotypes xmi:id="_1h010VzYEeiZV-LLre50nQ" name="Reference">
+      <modelElement href="eventProcessor.uml#_1T6VoFzYEeiZV-LLre50nQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_1h010lzYEeiZV-LLre50nQ" text="">
+      <visualProperties xmi:id="_U_RVUlzzEeiZV-LLre50nQ" position="-48.0,15.857142857142868"/>
+    </nameVisual>
+    <sourceRole xmi:id="_1h0101zYEeiZV-LLre50nQ" aggregationKind="NONE" name="">
+      <modelElement href="eventProcessor.uml#_1T5uklzYEeiZV-LLre50nQ"/>
+      <visualProperties xmi:id="_U_RVUVzzEeiZV-LLre50nQ" position="-18.0,-116.0"/>
+      <visibility xmi:id="_1h011FzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1h011VzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_1h011lzYEeiZV-LLre50nQ" aggregationKind="NONE" name="connection" navigable="true">
+      <modelElement href="eventProcessor.uml#_1TbNf1zYEeiZV-LLre50nQ"/>
+      <visualProperties xmi:id="_U_RVU1zzEeiZV-LLre50nQ" position="2.0,30.999999999999986"/>
+      <visibility xmi:id="_1h0111zYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1h012FzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_1h8KkFzYEeiZV-LLre50nQ" sourceAnchor="88.0,0.0" targetAnchor="155.0,85.0" target="_1hSDQFzYEeiZV-LLre50nQ" source="_1iF7l1zYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1T6VoVzYEeiZV-LLre50nQ"/>
+    <stereotypes xmi:id="_1h8KllzYEeiZV-LLre50nQ" name="Reference">
+      <modelElement href="eventProcessor.uml#_1T68sFzYEeiZV-LLre50nQ"/>
+    </stereotypes>
+    <nameVisual xmi:id="_1h8Kk1zYEeiZV-LLre50nQ" text="">
+      <visualProperties xmi:id="_1zX41VzYEeiZV-LLre50nQ" position="2.5,-46.333333333333314"/>
+    </nameVisual>
+    <sourceRole xmi:id="_1h8KlFzYEeiZV-LLre50nQ" aggregationKind="NONE" name="">
+      <modelElement href="eventProcessor.uml#_1T6VolzYEeiZV-LLre50nQ"/>
+      <visualProperties xmi:id="_1zX41FzYEeiZV-LLre50nQ" position="2.5,-80.33333333333331"/>
+      <visibility xmi:id="_1iF7k1zYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1iF7klzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </sourceRole>
+    <targetRole xmi:id="_1h8KlVzYEeiZV-LLre50nQ" aggregationKind="NONE" name="processor" navigable="true">
+      <modelElement href="eventProcessor.uml#_1TbNgVzYEeiZV-LLre50nQ"/>
+      <visualProperties xmi:id="_1zX41lzYEeiZV-LLre50nQ" position="-81.49999999999999,25.333333333333314"/>
+      <visibility xmi:id="_1iF7lVzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1iF7lFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </targetRole>
+  </edges>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1h8KklzYEeiZV-LLre50nQ" targetItem="_1iF7l1zYEeiZV-LLre50nQ" sourceItem="_1h8KkVzYEeiZV-LLre50nQ"/>
+  <edges xsi:type="com.yattasolutions.diagrams:ConnectionVisual" xmi:id="_1iF7kVzYEeiZV-LLre50nQ" targetItem="_1iF7n1zYEeiZV-LLre50nQ" sourceItem="_1iF7kFzYEeiZV-LLre50nQ"/>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1hI5UFzYEeiZV-LLre50nQ" sourceConnectionVisual="_1hI5UVzYEeiZV-LLre50nQ" text="&#xD;&#xA;Interface for processing messages from messaging queue&#xD;&#xA;&#xD;&#xA;@author Geraj" item="_1hSDQFzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TwkoFzYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1hSDSlzYEeiZV-LLre50nQ" sourceConnectionVisual="_1hSDS1zYEeiZV-LLre50nQ" text="Rabbit mq event processor&#xD;&#xA;&#xD;&#xA;@author Geraj" item="_1hb0ZFzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TxLsFzYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1hSDTFzYEeiZV-LLre50nQ" sourceConnectionVisual="_1hSDTVzYEeiZV-LLre50nQ" text="TODO DESCRIPTION" item="_1hb0gVzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TxLslzYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1hSDTlzYEeiZV-LLre50nQ" sourceConnectionVisual="_1hSDT1zYEeiZV-LLre50nQ" text="Constructs a new instance.&#xD;&#xA;   * @param infrastructureModel &#xD;&#xA;   * &#xD;&#xA;   * @param t" item="_1hb0iVzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TxLsVzYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1hSDUFzYEeiZV-LLre50nQ" sourceConnectionVisual="_1hSDUVzYEeiZV-LLre50nQ" text="@see calculations.simulation.event.EventProcessor#handleSimulationEvent(event.Event)" item="_1hb0pVzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TxLs1zYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1huvMFzYEeiZV-LLre50nQ" sourceConnectionVisual="_1huvMVzYEeiZV-LLre50nQ" text="Connecting to rabbit messaging queue exchange&#xD;&#xA;&#xD;&#xA;@author Geraj" item="_1h1c4FzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TxLtFzYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1huvMlzYEeiZV-LLre50nQ" sourceConnectionVisual="_1huvM1zYEeiZV-LLre50nQ" text="&#xD;&#xA;   * Constructs a new instance." item="_1h1c91zYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TxLtVzYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1huvNFzYEeiZV-LLre50nQ" sourceConnectionVisual="_1hyZkFzYEeiZV-LLre50nQ" text="&#xD;&#xA;   * Constructs a new instance.&#xD;&#xA;   * &#xD;&#xA;   * @param exchangeName&#xD;&#xA;   * @param host" item="_1h1c_VzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TxywFzYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1hzAoFzYEeiZV-LLre50nQ" sourceConnectionVisual="_1hzAoVzYEeiZV-LLre50nQ" text="&#xD;&#xA;   * Connect to exchange and start to consume&#xD;&#xA;   * @param processor - event processor to use for handling message in the event" item="_1h1dDFzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TxywVzYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1h8KkVzYEeiZV-LLre50nQ" sourceConnectionVisual="_1h8KklzYEeiZV-LLre50nQ" text="Consumes events from rabbitMQ&#xD;&#xA;&#xD;&#xA;@author Geraj" item="_1iF7l1zYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1TxywlzYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.diagrams:CommentVisual" xmi:id="_1iF7kFzYEeiZV-LLre50nQ" sourceConnectionVisual="_1iF7kVzYEeiZV-LLre50nQ" text="Constructs a new instance.&#xD;&#xA;   * @param channel" item="_1iF7n1zYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1Txyw1zYEeiZV-LLre50nQ"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_1h1c4FzYEeiZV-LLre50nQ" comments="_1huvMFzYEeiZV-LLre50nQ" targetConnectionVisual="_1huvMVzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter" associationsIn="_1hb0W1zYEeiZV-LLre50nQ" associationsOut="_1h010FzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1RodsFzYEeiZV-LLre50nQ"/>
+    <visualProperties xmi:id="_1h1c4VzYEeiZV-LLre50nQ" position="-712.0,46.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_1h1c4lzYEeiZV-LLre50nQ" label="+"/>
+    <attributes xmi:id="_1h1c41zYEeiZV-LLre50nQ" defaultValue="&quot;event_exchange&quot;" name="EXCHANGE_NAME" staticAttribute="true">
+      <modelElement href="eventProcessor.uml#_1TbNeFzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1h1c5FzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TbNelzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1h1c5VzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1h1c5lzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1h1c51zYEeiZV-LLre50nQ" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_1h1c6FzYEeiZV-LLre50nQ" name="exchange">
+      <modelElement href="eventProcessor.uml#_1TbNe1zYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1h1c6VzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TbNfFzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1h1c6lzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1h1c61zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1h1c7FzYEeiZV-LLre50nQ" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_1h1c7VzYEeiZV-LLre50nQ" name="host">
+      <modelElement href="eventProcessor.uml#_1TbNfVzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1h1c7lzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TbNflzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1h1c71zYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1h1c8FzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1h1c8VzYEeiZV-LLre50nQ" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_1h1c8lzYEeiZV-LLre50nQ" name="connection">
+      <modelElement href="eventProcessor.uml#_1TbNf1zYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1h1c81zYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TbNgFzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1h1c9FzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1h1c9VzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1h1c9lzYEeiZV-LLre50nQ" name="Connection">
+        <modelElement href="eventProcessor.uml#_1S0whlzYEeiZV-LLre50nQ"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_1h1c91zYEeiZV-LLre50nQ" comments="_1huvMlzYEeiZV-LLre50nQ" targetConnectionVisual="_1huvM1zYEeiZV-LLre50nQ" name="RabbitExchangeConnecter">
+      <modelElement href="eventProcessor.uml#_1RodsVzYEeiZV-LLre50nQ"/>
+      <keywords xmi:id="_1h1c-FzYEeiZV-LLre50nQ" keyword="create"/>
+      <visibility xmi:id="_1h1c-VzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1h1c-lzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_1h1c-1zYEeiZV-LLre50nQ">
+        <modelElement href="eventProcessor.uml#_1RodtFzYEeiZV-LLre50nQ"/>
+        <type xmi:id="_1h1c_FzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter">
+          <modelElement href="eventProcessor.uml#_1RodsFzYEeiZV-LLre50nQ"/>
+        </type>
+      </outParameters>
+    </operations>
+    <operations xmi:id="_1h1c_VzYEeiZV-LLre50nQ" comments="_1huvNFzYEeiZV-LLre50nQ" targetConnectionVisual="_1hyZkFzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter">
+      <modelElement href="eventProcessor.uml#_1RodtVzYEeiZV-LLre50nQ"/>
+      <keywords xmi:id="_1h1c_lzYEeiZV-LLre50nQ" keyword="create"/>
+      <visibility xmi:id="_1h1c_1zYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1h1dAFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_1h1dAVzYEeiZV-LLre50nQ">
+        <modelElement href="eventProcessor.uml#_1RodulzYEeiZV-LLre50nQ"/>
+        <type xmi:id="_1h1dAlzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter">
+          <modelElement href="eventProcessor.uml#_1RodsFzYEeiZV-LLre50nQ"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_1h1dA1zYEeiZV-LLre50nQ" name="exchangeName">
+        <modelElement href="eventProcessor.uml#_1RodtlzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1h1dBFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1h1dBVzYEeiZV-LLre50nQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_1h1dBlzYEeiZV-LLre50nQ" name="host">
+        <modelElement href="eventProcessor.uml#_1Rodt1zYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1h1dB1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1h1dCFzYEeiZV-LLre50nQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_1h1dCVzYEeiZV-LLre50nQ" name="disconnect">
+      <modelElement href="eventProcessor.uml#_1Rodu1zYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1h1dClzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1h1dC1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </operations>
+    <operations xmi:id="_1h1dDFzYEeiZV-LLre50nQ" comments="_1hzAoFzYEeiZV-LLre50nQ" targetConnectionVisual="_1hzAoVzYEeiZV-LLre50nQ" name="connect">
+      <modelElement href="eventProcessor.uml#_1S-hgVzYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1h1dDVzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1h1dDlzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <parameters xmi:id="_1h1dD1zYEeiZV-LLre50nQ" name="processor">
+        <modelElement href="eventProcessor.uml#_1S-hglzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1h1dEFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1h1dEVzYEeiZV-LLre50nQ" name="EventProcessor">
+          <modelElement href="eventProcessor.uml#_1RViwFzYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:InterfaceVisual" xmi:id="_U6rJMFzzEeiZV-LLre50nQ" name="Connection" associationsIn="_1h010FzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1S0whlzYEeiZV-LLre50nQ"/>
+    <visualProperties xmi:id="_U6rJMVzzEeiZV-LLre50nQ" position="-445.0,-201.0" size="364.0,100.0" visible="false"/>
+    <stereotypes xmi:id="_U6rJMlzzEeiZV-LLre50nQ" name="Reference">
+      <modelElement href="eventProcessor.uml#_1S0wh1zYEeiZV-LLre50nQ"/>
+    </stereotypes>
+    <visibility xmi:id="_U6rJM1zzEeiZV-LLre50nQ" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_1iF7vFzYEeiZV-LLre50nQ" name="IOException">
+    <modelElement href="eventProcessor.uml#_1S0wgFzYEeiZV-LLre50nQ"/>
+    <visualProperties xmi:id="_1iF7vVzYEeiZV-LLre50nQ" position="232.0,636.0" size="-1.0,-1.0" visible="false"/>
+    <stereotypes xmi:id="_1iF7vlzYEeiZV-LLre50nQ" name="Reference">
+      <modelElement href="eventProcessor.uml#_1S0wgVzYEeiZV-LLre50nQ"/>
+    </stereotypes>
+    <visibility xmi:id="_1iF7v1zYEeiZV-LLre50nQ" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_1iF7l1zYEeiZV-LLre50nQ" comments="_1h8KkVzYEeiZV-LLre50nQ" targetConnectionVisual="_1h8KklzYEeiZV-LLre50nQ" name="RabbitMessageConsumer" associationsOut="_1h8KkFzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1RodvFzYEeiZV-LLre50nQ"/>
+    <visualProperties xmi:id="_1iF7mFzYEeiZV-LLre50nQ" position="60.0,257.0" size="559.0,85.0"/>
+    <visibility xmi:id="_1iF7mVzYEeiZV-LLre50nQ" label="+"/>
+    <attributes xmi:id="_1iF7mlzYEeiZV-LLre50nQ" name="processor">
+      <modelElement href="eventProcessor.uml#_1TbNgVzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1iF7m1zYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TbNglzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1iF7nFzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1iF7nVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1iF7nlzYEeiZV-LLre50nQ" name="EventProcessor">
+        <modelElement href="eventProcessor.uml#_1RViwFzYEeiZV-LLre50nQ"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_1iF7n1zYEeiZV-LLre50nQ" comments="_1iF7kFzYEeiZV-LLre50nQ" targetConnectionVisual="_1iF7kVzYEeiZV-LLre50nQ" name="RabbitMessageConsumer">
+      <modelElement href="eventProcessor.uml#_1TRccFzYEeiZV-LLre50nQ"/>
+      <keywords xmi:id="_1iF7oFzYEeiZV-LLre50nQ" keyword="create"/>
+      <visibility xmi:id="_1iF7oVzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1iF7olzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_1iF7o1zYEeiZV-LLre50nQ">
+        <modelElement href="eventProcessor.uml#_1TRcdVzYEeiZV-LLre50nQ"/>
+        <type xmi:id="_1iF7pFzYEeiZV-LLre50nQ" name="RabbitMessageConsumer">
+          <modelElement href="eventProcessor.uml#_1RodvFzYEeiZV-LLre50nQ"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_1iF7pVzYEeiZV-LLre50nQ" name="channel">
+        <modelElement href="eventProcessor.uml#_1TRccVzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1iF7plzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1iF7p1zYEeiZV-LLre50nQ" name="Channel">
+          <modelElement href="eventProcessor.uml#_1S0whFzYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_1iF7qFzYEeiZV-LLre50nQ" name="processor">
+        <modelElement href="eventProcessor.uml#_1TRcclzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1iF7qVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1iF7qlzYEeiZV-LLre50nQ" name="EventProcessor">
+          <modelElement href="eventProcessor.uml#_1RViwFzYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_1iF7q1zYEeiZV-LLre50nQ" name="handleDelivery">
+      <modelElement href="eventProcessor.uml#_1TRcdlzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1iF7rFzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TRce1zYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_1iF7rVzYEeiZV-LLre50nQ" name="Annotations">
+        <modelElement href="eventProcessor.uml#_1TRcflzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1iF7rlzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1iF7r1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <parameters xmi:id="_1iF7sFzYEeiZV-LLre50nQ" name="consumerTag">
+        <modelElement href="eventProcessor.uml#_1TRcd1zYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1iF7sVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1iF7slzYEeiZV-LLre50nQ" name="String">
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_1iF7s1zYEeiZV-LLre50nQ" name="envelope">
+        <modelElement href="eventProcessor.uml#_1TRceFzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1iF7tFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1iF7tVzYEeiZV-LLre50nQ" name="Envelope">
+          <modelElement href="eventProcessor.uml#_1S-hh1zYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_1iF7tlzYEeiZV-LLre50nQ" name="properties">
+        <modelElement href="eventProcessor.uml#_1TRceVzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1iF7t1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1iF7uFzYEeiZV-LLre50nQ" name="BasicProperties">
+          <modelElement href="eventProcessor.uml#_1S-hi1zYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_1iF7uVzYEeiZV-LLre50nQ" name="body">
+        <modelElement href="eventProcessor.uml#_1TRcelzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1iF7ulzYEeiZV-LLre50nQ" label="1..*" max="-1" min="1"/>
+        <type xmi:id="_1iF7u1zYEeiZV-LLre50nQ" name="byte">
+          <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#byte"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:InterfaceVisual" xmi:id="_1hSDQFzYEeiZV-LLre50nQ" comments="_1hI5UFzYEeiZV-LLre50nQ" targetConnectionVisual="_1hI5UVzYEeiZV-LLre50nQ" name="EventProcessor" associationsIn="_1h8KkFzYEeiZV-LLre50nQ" subclassedBy="_1hSDSVzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1RViwFzYEeiZV-LLre50nQ"/>
+    <visualProperties xmi:id="_1hSDQVzYEeiZV-LLre50nQ" position="-7.0,42.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_1hSDQlzYEeiZV-LLre50nQ" label="+"/>
+    <operations xmi:id="_1hSDQ1zYEeiZV-LLre50nQ" name="handleSimulationEvent">
+      <modelElement href="eventProcessor.uml#_1TISgFzYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1hSDRFzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hSDRVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <parameters xmi:id="_1hSDRlzYEeiZV-LLre50nQ" name="event">
+        <modelElement href="eventProcessor.uml#_1TISgVzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1hSDR1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1hSDSFzYEeiZV-LLre50nQ" name="Event">
+          <modelElement href="eventProcessor.uml#_1Sh1kFzYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_1hb0ZFzYEeiZV-LLre50nQ" comments="_1hSDSlzYEeiZV-LLre50nQ" targetConnectionVisual="_1hSDS1zYEeiZV-LLre50nQ" name="RabbitEventProcessor" associationsOut="_1hb0QFzYEeiZV-LLre50nQ _1hb0SVzYEeiZV-LLre50nQ _1hb0UlzYEeiZV-LLre50nQ _1hb0W1zYEeiZV-LLre50nQ" generalizations="_1hSDSVzYEeiZV-LLre50nQ">
+    <modelElement href="eventProcessor.uml#_1RfTwFzYEeiZV-LLre50nQ"/>
+    <visualProperties xmi:id="_1hb0ZVzYEeiZV-LLre50nQ" position="-750.0,365.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_1hb0ZlzYEeiZV-LLre50nQ" label="+"/>
+    <attributes xmi:id="_1hb0Z1zYEeiZV-LLre50nQ" defaultValue="new LinkedList&lt;Listener>()" name="listeners">
+      <modelElement href="eventProcessor.uml#_1TRcgVzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1hb0aFzYEeiZV-LLre50nQ" name="Generics">
+        <modelElement href="eventProcessor.uml#_1TRcglzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_1hb0aVzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TRchFzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1hb0alzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1hb0a1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1hb0bFzYEeiZV-LLre50nQ" name="LinkedList">
+        <modelElement href="eventProcessor.uml#_1Sh1klzYEeiZV-LLre50nQ"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_1hb0bVzYEeiZV-LLre50nQ" name="infrastructureModel">
+      <modelElement href="eventProcessor.uml#_1TRchVzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1hb0blzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TbNcFzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1hb0b1zYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1hb0cFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1hb0cVzYEeiZV-LLre50nQ" name="ModelAndGraphBuilder">
+        <modelElement href="eventProcessor.uml#_1Srmk1zYEeiZV-LLre50nQ"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_1hb0clzYEeiZV-LLre50nQ" name="timer">
+      <modelElement href="eventProcessor.uml#_1TbNcVzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1hb0c1zYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TbNclzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1hb0dFzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1hb0dVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1hb0dlzYEeiZV-LLre50nQ" name="Timer">
+        <modelElement href="eventProcessor.uml#_1Srml1zYEeiZV-LLre50nQ"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_1hb0d1zYEeiZV-LLre50nQ" name="lastCommonTime">
+      <modelElement href="eventProcessor.uml#_1TbNc1zYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1hb0eFzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TbNdFzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1hb0eVzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1hb0elzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1hb0e1zYEeiZV-LLre50nQ" name="int">
+        <modelElement href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_1hb0fFzYEeiZV-LLre50nQ" defaultValue="new RabbitExchangeConnecter()" name="rabbitExchangeConnector">
+      <modelElement href="eventProcessor.uml#_1TbNdVzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1hb0fVzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TbNd1zYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1hb0flzYEeiZV-LLre50nQ" label="-"/>
+      <cardinality xmi:id="_1hb0f1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <type xmi:id="_1hb0gFzYEeiZV-LLre50nQ" name="RabbitExchangeConnecter">
+        <modelElement href="eventProcessor.uml#_1RodsFzYEeiZV-LLre50nQ"/>
+      </type>
+    </attributes>
+    <operations xmi:id="_1hb0gVzYEeiZV-LLre50nQ" comments="_1hSDTFzYEeiZV-LLre50nQ" targetConnectionVisual="_1hSDTVzYEeiZV-LLre50nQ" name="closeConnection">
+      <modelElement href="eventProcessor.uml#_1RfTwVzYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1hb0glzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0g1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </operations>
+    <operations xmi:id="_1hb0hFzYEeiZV-LLre50nQ" name="notifyObservers">
+      <modelElement href="eventProcessor.uml#_1RfTwlzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1hb0hVzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1RfTw1zYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_1hb0hlzYEeiZV-LLre50nQ" name="Annotations">
+        <modelElement href="eventProcessor.uml#_1RfTxFzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1hb0h1zYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0iFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+    </operations>
+    <operations xmi:id="_1hb0iVzYEeiZV-LLre50nQ" comments="_1hSDTlzYEeiZV-LLre50nQ" targetConnectionVisual="_1hSDT1zYEeiZV-LLre50nQ" name="RabbitEventProcessor">
+      <modelElement href="eventProcessor.uml#_1TISg1zYEeiZV-LLre50nQ"/>
+      <keywords xmi:id="_1hb0ilzYEeiZV-LLre50nQ" keyword="create"/>
+      <visibility xmi:id="_1hb0i1zYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0jFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <outParameters xmi:id="_1hb0jVzYEeiZV-LLre50nQ">
+        <modelElement href="eventProcessor.uml#_1TISiFzYEeiZV-LLre50nQ"/>
+        <type xmi:id="_1hb0jlzYEeiZV-LLre50nQ" name="RabbitEventProcessor">
+          <modelElement href="eventProcessor.uml#_1RfTwFzYEeiZV-LLre50nQ"/>
+        </type>
+      </outParameters>
+      <parameters xmi:id="_1hb0j1zYEeiZV-LLre50nQ" name="infrastructureModel">
+        <modelElement href="eventProcessor.uml#_1TIShFzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1hb0kFzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1hb0kVzYEeiZV-LLre50nQ" name="ModelAndGraphBuilder">
+          <modelElement href="eventProcessor.uml#_1Srmk1zYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+      <parameters xmi:id="_1hb0klzYEeiZV-LLre50nQ" name="t">
+        <modelElement href="eventProcessor.uml#_1TIShVzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1hb0k1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1hb0lFzYEeiZV-LLre50nQ" name="Timer">
+          <modelElement href="eventProcessor.uml#_1Srml1zYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_1hb0lVzYEeiZV-LLre50nQ" name="registerObserver">
+      <modelElement href="eventProcessor.uml#_1TISiVzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1hb0llzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TISi1zYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_1hb0l1zYEeiZV-LLre50nQ" name="Annotations">
+        <modelElement href="eventProcessor.uml#_1TISjFzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1hb0mFzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0mVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <parameters xmi:id="_1hb0mlzYEeiZV-LLre50nQ" name="listener">
+        <modelElement href="eventProcessor.uml#_1TISilzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1hb0m1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1hb0nFzYEeiZV-LLre50nQ" name="Listener">
+          <modelElement href="eventProcessor.uml#_1SrmmVzYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_1hb0nVzYEeiZV-LLre50nQ" name="unRegisterObserver">
+      <modelElement href="eventProcessor.uml#_1TISjlzYEeiZV-LLre50nQ"/>
+      <stereotypes xmi:id="_1hb0nlzYEeiZV-LLre50nQ" name="LegacyStyledElement">
+        <modelElement href="eventProcessor.uml#_1TISkFzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <stereotypes xmi:id="_1hb0n1zYEeiZV-LLre50nQ" name="Annotations">
+        <modelElement href="eventProcessor.uml#_1TISkVzYEeiZV-LLre50nQ"/>
+      </stereotypes>
+      <visibility xmi:id="_1hb0oFzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0oVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <parameters xmi:id="_1hb0olzYEeiZV-LLre50nQ" name="listener">
+        <modelElement href="eventProcessor.uml#_1TISj1zYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1hb0o1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1hb0pFzYEeiZV-LLre50nQ" name="Listener">
+          <modelElement href="eventProcessor.uml#_1SrmmVzYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+    </operations>
+    <operations xmi:id="_1hb0pVzYEeiZV-LLre50nQ" comments="_1hSDUFzYEeiZV-LLre50nQ" targetConnectionVisual="_1hSDUVzYEeiZV-LLre50nQ" name="handleSimulationEvent">
+      <modelElement href="eventProcessor.uml#_1TISk1zYEeiZV-LLre50nQ"/>
+      <visibility xmi:id="_1hb0plzYEeiZV-LLre50nQ" label="+"/>
+      <cardinality xmi:id="_1hb0p1zYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+      <parameters xmi:id="_1hb0qFzYEeiZV-LLre50nQ" name="event">
+        <modelElement href="eventProcessor.uml#_1TISlFzYEeiZV-LLre50nQ"/>
+        <cardinality xmi:id="_1hb0qVzYEeiZV-LLre50nQ" label="1" max="1" min="1"/>
+        <type xmi:id="_1hb0qlzYEeiZV-LLre50nQ" name="Event">
+          <modelElement href="eventProcessor.uml#_1Sh1kFzYEeiZV-LLre50nQ"/>
+        </type>
+      </parameters>
+    </operations>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>

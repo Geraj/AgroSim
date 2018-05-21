@@ -39,7 +39,7 @@ public class RabbitMessageConsumer extends DefaultConsumer{
       throws IOException {        
     Event o = EventSerializationUtil.createEventFromByteArray(body);
     System.out.println(" [x] Received '" + o + "'");
-    processor.handleEvent(o);
+    processor.handleSimulationEvent(o);
     // TODO process event
   }
 
