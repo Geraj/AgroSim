@@ -1,7 +1,7 @@
 package control.observer;
 /**
  * 
- * TODO DESCRIPTION
+ * State machine listener
  * 
  * @author Geraj
  */

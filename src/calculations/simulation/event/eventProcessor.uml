@@ -259,13 +259,13 @@ Interface for processing messages from messaging queue&#xD;
    * @param exchangeName&#xD;
    * @param host</body>
               </ownedComment>
+              <ownedParameter xmi:id="_1RodulzYEeiZV-LLre50nQ" type="_1RodsFzYEeiZV-LLre50nQ" direction="return"/>
               <ownedParameter xmi:id="_1RodtlzYEeiZV-LLre50nQ" name="exchangeName">
                 <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
               </ownedParameter>
               <ownedParameter xmi:id="_1Rodt1zYEeiZV-LLre50nQ" name="host">
                 <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
               </ownedParameter>
-              <ownedParameter xmi:id="_1RodulzYEeiZV-LLre50nQ" type="_1RodsFzYEeiZV-LLre50nQ" direction="return"/>
             </ownedOperation>
             <ownedOperation xmi:id="_1Rodu1zYEeiZV-LLre50nQ" name="disconnect" method="_1TvWhlzYEeiZV-LLre50nQ"/>
             <ownedOperation xmi:id="_1S-hgVzYEeiZV-LLre50nQ" name="connect" method="_1TvWhFzYEeiZV-LLre50nQ">
@@ -320,8 +320,8 @@ Interface for processing messages from messaging queue&#xD;
    * @param channel</body>
               </ownedComment>
               <ownedParameter xmi:id="_1TRccVzYEeiZV-LLre50nQ" name="channel" type="_1S0whFzYEeiZV-LLre50nQ"/>
-              <ownedParameter xmi:id="_1TRcclzYEeiZV-LLre50nQ" name="processor" type="_1RViwFzYEeiZV-LLre50nQ"/>
               <ownedParameter xmi:id="_1TRcdVzYEeiZV-LLre50nQ" type="_1RodvFzYEeiZV-LLre50nQ" direction="return"/>
+              <ownedParameter xmi:id="_1TRcclzYEeiZV-LLre50nQ" name="processor" type="_1RViwFzYEeiZV-LLre50nQ"/>
             </ownedOperation>
             <ownedOperation xmi:id="_1TRcdlzYEeiZV-LLre50nQ" name="handleDelivery" method="_1Tv9lFzYEeiZV-LLre50nQ" raisedException="_1S0wgFzYEeiZV-LLre50nQ">
               <ownedParameter xmi:id="_1TRcd1zYEeiZV-LLre50nQ" name="consumerTag">

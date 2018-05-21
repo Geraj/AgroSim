@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 
- * TODO DESCRIPTION
+ * Event dispatcer for state machine
  * 
  * @author Geraj
  */
