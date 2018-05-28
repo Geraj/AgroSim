@@ -9,7 +9,7 @@ import java.util.concurrent.Semaphore;
 
 import control.observer.EventDispatcher;
 import control.observer.StateMachineEvents;
-
+import control.statemachine.MovingToParcel;
 import calculations.ModelAndGraphBuilder;
 
 import core.Machines;
@@ -48,7 +48,7 @@ public class MachineSimulate implements Runnable {
 	private BufferedWriter out;
 	private FileWriter fstreamanim;
 	private BufferedWriter outanim;
-	public String log;
+	//public String log;
 	private Semaphore sem;
 	private Semaphore sem2;
 
@@ -81,7 +81,7 @@ public class MachineSimulate implements Runnable {
 		this.sem2 = sem2;
 		onroad = 0;
 		currentparcel = 0;
-		log = "Start Machine" + machineName + "\n";
+		String log = "Start Machine" + machineName + "\n";
 		String title = graph.base.getName() + "_" + machineName + "_Operation_"
 				+ graph.operation.getName();
 		try {
@@ -163,9 +163,10 @@ public class MachineSimulate implements Runnable {
 		double haperminute = timeperHA / 60;
 		//EventDispatcher.getInstance().fireEvent(Events.VEHICLE_STARTED, null, this.machineName);
 		while (!isReady()) {
+			int x = 3;
 			synchronized (myTimer) {
 				// no more work here
-				if ((graph.parcelstatus[currentparcel] >= 100) && (myTimer.timeOnMachineThreads[myTimerID] < time)) {
+				if ((graph.parcelstatus[currentparcel] >= 100) && isBehind()) {
 					myTimer.timeOnMachineThreads[myTimerID] = time;
 					// not heading tovards a complete parcel (base)
 					if (time > onroad) {
@@ -173,9 +174,6 @@ public class MachineSimulate implements Runnable {
 														// parcel with free place
 						if (work != 0) {
 							if (currentparcel != 0) {// dont show if at base
-								// System.out.println(machineName+"
-								// "+convertMinutes(time)+"Completed:"+graph.parcels[currentparcel].getID()+"
-								// parcel");
 								writetofile(" " + convertMinutes(time) + "Completed:"
 										+ graph.parcels[currentparcel].getName() + " parcel\n");
 							}
@@ -192,14 +190,11 @@ public class MachineSimulate implements Runnable {
 								onroad = time + timetotravel;
 								graph.workersonparcell[currentparcel] -= 1;
 								graph.workersonparcell[work] += 1;
-								// System.out.println(machineName+"
-								// "+convertMinutes(time)+"seletced:"+graph.parcels[work].getName()+" parcel for
-								// working, time when there:"+convertMinutes(onroad)+" time to
-								// travel:"+timetotravel);
 								EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_MOVING_TO_PARCEL,
-										this.currentparcel, this.machineName);
-								addpathtolog(work, currentparcel, timetotravel);
-								writetofile(log);
+										new MovingToParcel(graph.parcels[currentparcel].getID(),
+												graph.parcels[work].getID()),
+										this.machineName);								
+								writetofile(addpathtolog(work, currentparcel, timetotravel));
 								currentparcel = work;
 							}
 							sem.release();
@@ -207,18 +202,14 @@ public class MachineSimulate implements Runnable {
 					}
 				} else {
 					// work a minute if tick is 1min in plus
-					if ((time >= onroad) && (myTimer.timeOnMachineThreads[myTimerID] < time) && (currentparcel != 0)
+					if ((time >= onroad) && isBehind() && (currentparcel != 0)
 							&& (graph.parcelstatus[currentparcel] < 100)) {
 						int minutesToBase = (int) (graph.D[currentparcel][0] * 60 / ((speed * 1000)) + 1);// TODO test
 																											// this
 						if ((((time % 599 == 1)) || (((time + minutesToBase) % 599 == 1))) && (time != 1)) {// next day
-							// System.out.println(machineName+" "+convertMinutes(time)+":work is ower for
-							// today:)");
 							graph.workersonparcell[currentparcel] -= 1;
 							returnToBase(true);
 							currentparcel = 0;
-							// /addpathtolog(0, currentparcel, 20);
-							// distancetraveld+=graph.D[currentparcel][0];
 							writetofile("work is ower for today:)\n");
 
 						} else {
@@ -244,22 +235,16 @@ public class MachineSimulate implements Runnable {
 									areaWorked += hapm;
 									double d = hapm * 100 / graph.parcels[currentparcel].getArea() * 100;
 									int p = (int) d;
-									// System.out.println(machineName+" "+convertMinutes(time)+"Added to
-									// "+graph.parcels[currentparcel].getName()+
-									// " %"+hapm*100/graph.parcels[currentparcel].getArea());
 									writetofile(convertMinutes(time) + "Completed on "
 											+ graph.parcels[currentparcel].getName() + " %" + p / 100.0 + "\n");
 									EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_WORKING,
-											this.currentparcel, this.machineName);
+											graph.parcels[currentparcel].getID(), this.machineName);
 								} else {
 									double remaining = 100 - graph.parcelstatus[currentparcel];
 									areaWorked += (remaining * graph.parcels[currentparcel].getArea()) / 100;
 									graph.parcelstatus[currentparcel] = 100;
 									double d = remaining * 100;
 									int p = (int) d;
-									// System.out.println(machineName+" "+convertMinutes(time)+"Completed on
-									// "+graph.parcels[currentparcel].getName()+
-									// " %"+remaining);
 									writetofile(convertMinutes(time) + "Added to "
 											+ graph.parcels[currentparcel].getName() + " %" + p / 100.0 + "\n");
 								}
@@ -269,7 +254,7 @@ public class MachineSimulate implements Runnable {
 						myTimer.timeOnMachineThreads[myTimerID] = time;
 					}
 					// travel a minute
-					if ((time < onroad) && (myTimer.timeOnMachineThreads[myTimerID] < time)) {
+					if ((time < onroad) && isBehind()) {
 						myTimer.timeOnMachineThreads[myTimerID] = time;
 						if ((time % 599 == 1) && (time != 1)) {// next day
 							// System.out.println(machineName+" "+convertMinutes(time)+":work is ower for
@@ -277,16 +262,10 @@ public class MachineSimulate implements Runnable {
 							graph.workersonparcell[currentparcel] -= 1;
 							distancetraveld += graph.D[currentparcel][0];
 							// //////
-							currentparcel = 0;
 							EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_MOVING_TO_PARCEL,
-									this.currentparcel, this.machineName);
-							// int timetotravel=(int)
-							// (graph.D[currentparcel][0]*60/((speed*myrand()*1000))+1);
-							// writetofile("work is ower for today:D\n");
-							// writetoanim("Selectsdsds -1 "+Integer.toString(time)+"
-							// "+Integer.toString(0)+"\n");
-							// addpathtolog(0, currentparcel, timetotravel);
-							// addpathtolog(currentparcel,0, timetotravel);
+									new MovingToParcel(graph.parcels[currentparcel].getID(), 0), this.machineName);
+							currentparcel = 0;
+
 						}
 					}
 				}
@@ -312,6 +291,10 @@ public class MachineSimulate implements Runnable {
 		}
 	}
 
+	private boolean isBehind() {
+		return myTimer.timeOnMachineThreads[myTimerID] < time;
+	}
+
 	/**
 	 * Return to base and log the path.
 	 */
@@ -320,9 +303,8 @@ public class MachineSimulate implements Runnable {
 		int timetotravel = (int) (graph.D[currentparcel][0] * 60
 				/ ((speed * myrand() * 1000)) + 1);
 		onroad = timetotravel + time;
-		addpathtolog(0, currentparcel, timetotravel);
-		EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_MOVING_TO_PARCEL, graph.parcels[0].getName(), this.machineName);
-		writetofile(log);
+		writetofile(addpathtolog(0, currentparcel, timetotravel));
+		EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_MOVING_TO_PARCEL, new MovingToParcel(graph.parcels[currentparcel].getID(), 0), this.machineName);
 	}
 
 	/**
@@ -338,9 +320,8 @@ public class MachineSimulate implements Runnable {
 			timetotravel = (int) (graph.D[currentparcel][0] * 60
 					/ ((speed * myrand() * 1000)) + 1);
 		}
-		onroad = timetotravel + time;
-		addpathtolog(0, currentparcel, timetotravel);
-		writetofile(log);
+		onroad = timetotravel + time;	
+		writetofile(addpathtolog(0, currentparcel, timetotravel));
 	}
 
 	private void writetofile(String s) {
@@ -370,13 +351,14 @@ public class MachineSimulate implements Runnable {
 	 * @param newparcel
 	 * @param oldparcel
 	 * @param timetotravel
+	 * @return 
 	 */
-	private void addpathtolog(int newparcel, int oldparcel, int timetotravel) {
-		log = "";
-		log += " " + convertMinutes(time) + "seletced:"
+	private String addpathtolog(int newparcel, int oldparcel, int timetotravel) {
+		StringBuilder log = new StringBuilder();
+		log.append(" " + convertMinutes(time) + "seletced:"
 				+ graph.parcels[newparcel].getName() + " ,time when there:"
 				+ convertMinutes(onroad) + "time to travel:" + timetotravel
-				+ "\n";
+				+ "\n");
 		writetoanim("Select " + graph.parcels[newparcel].getID() + " " + onroad
 				+ " " + timetotravel + "\n");
 		ArrayList<Integer> path = new ArrayList<Integer>();
@@ -388,26 +370,27 @@ public class MachineSimulate implements Runnable {
 			n++;
 		}
 		if (n == 0) {
-			log += " Connection(from:" + graph.parcels[oldparcel].getName()
+			log.append(" Connection(from:" + graph.parcels[oldparcel].getName()
 					+ " to:" + graph.parcels[newparcel].getName()
 					+ "): Direct connection" + " distance:"
-					+ graph.D[newparcel][oldparcel] + "m\n";
+					+ graph.D[newparcel][oldparcel] + "m\n");
 			writetoanim("Con " + graph.parcels[oldparcel].getID() + " "
 					+ graph.parcels[newparcel].getID() + "\n");
 		} else {
-			log += " Connection(from:" + graph.parcels[oldparcel].getName()
-					+ " to:" + graph.parcels[newparcel].getName() + "): ";
+			log.append( " Connection(from:" + graph.parcels[oldparcel].getName()
+					+ " to:" + graph.parcels[newparcel].getName() + "): ");
 			writetoanim("Con " + graph.parcels[oldparcel].getID());
-			log += graph.parcels[oldparcel].getName() + "->";
+			log.append(graph.parcels[oldparcel].getName() + "->");
 			for (int i = 0; i < n; i++) {
-				log += graph.parcels[path.get(i)].getName() + "->";
+				log.append( graph.parcels[path.get(i)].getName() + "->");
 				writetoanim(" " + graph.parcels[path.get(i)].getID());
 			}
-			log += graph.parcels[newparcel].getName() + " distance:"
-					+ graph.D[newparcel][oldparcel] + "m\n";
+			log.append(graph.parcels[newparcel].getName() + " distance:"
+					+ graph.D[newparcel][oldparcel] + "m\n");
 			writetoanim(" " + graph.parcels[newparcel].getID() + "\n");
-
+			
 		}
+		return log.toString();
 	}
 
 	/**

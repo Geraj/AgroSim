@@ -3,7 +3,7 @@ package calculations.simulation;
 import java.util.LinkedList;
 
 import control.observer.StateMachineEvents;
-import control.observer.Listener;
+import control.observer.StateListener;
 import control.observer.Observable;
 
 import calculations.ModelAndGraphBuilder;
@@ -17,7 +17,7 @@ import calculations.ModelAndGraphBuilder;
  */
 @Deprecated
 public class TimerTick implements Runnable, Observable {
-  private LinkedList<Listener> listeners = new LinkedList<Listener>();
+  private LinkedList<StateListener> listeners = new LinkedList<StateListener>();
 
   private ModelAndGraphBuilder graphBuilder;
 
@@ -84,20 +84,20 @@ public class TimerTick implements Runnable, Observable {
 
   @Override
   public void notifyObservers() {
-    for (Listener listener : this.listeners) {
+    for (StateListener listener : this.listeners) {
       listener.handleEvent(StateMachineEvents.TICK, new Integer(this.lastCommonTime), this);
     }
 
   }
 
   @Override
-  public void registerObserver(Listener listener) {
+  public void registerObserver(StateListener listener) {
     this.listeners.add(listener);
 
   }
 
   @Override
-  public void unRegisterObserver(Listener listener) {
+  public void unRegisterObserver(StateListener listener) {
     this.listeners.remove(listener);
   }
 

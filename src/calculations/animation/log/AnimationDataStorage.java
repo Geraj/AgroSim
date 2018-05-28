@@ -12,10 +12,15 @@ public class AnimationDataStorage {
    */
   public ArrayList<AnimationData> annimationData = new ArrayList<AnimationData>();
 
+  /** Operation */
   public String operation;
 
+  /** List of machines */
   public ArrayList<String> machine;
 
+  /**
+   * Construct instance
+   */
   public AnimationDataStorage() {
     annimationData = new ArrayList<AnimationData>();
     machine = new ArrayList<String>();

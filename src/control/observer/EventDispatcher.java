@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 
  * @author Geraj
  */
-public class EventDispatcher implements EventProducer, Listener {
+public class EventDispatcher implements EventProducer, StateListener {
 
   private static EventDispatcher instance = null;
 
@@ -20,14 +20,14 @@ public class EventDispatcher implements EventProducer, Listener {
     return instance;
   }
 
-  public ConcurrentHashMap<Listener, LinkedList<StateMachineEvents>> registeredListeners = new ConcurrentHashMap<Listener, LinkedList<StateMachineEvents>>();
+  public ConcurrentHashMap<StateListener, LinkedList<StateMachineEvents>> registeredListeners = new ConcurrentHashMap<StateListener, LinkedList<StateMachineEvents>>();
 
   /**
    * Fire events to all listeners subscribed
    */
   @Override
   public void fireEvent(StateMachineEvents event, Object parameter, Object source) {
-    for (Listener listeners : this.registeredListeners.keySet()) {
+    for (StateListener listeners : this.registeredListeners.keySet()) {
       if (listeners != null) {
         if (this.registeredListeners.get(listeners) != null && this.registeredListeners.get(
             listeners).contains(event)) {
@@ -46,7 +46,7 @@ public class EventDispatcher implements EventProducer, Listener {
     this.fireEvent(eventType, message, source);
   }
 
-  public void registerListener(Listener listener, StateMachineEvents event) {
+  public void registerListener(StateListener listener, StateMachineEvents event) {
     if (this.registeredListeners.containsKey(listener)) {
       this.registeredListeners.get(listener).add(event);
     } else {
@@ -56,13 +56,13 @@ public class EventDispatcher implements EventProducer, Listener {
     }
   }
 
-  public void unRegisterListener(Listener listener, StateMachineEvents event) {
+  public void unRegisterListener(StateListener listener, StateMachineEvents event) {
     if (this.registeredListeners.keySet().contains(listener)) {
       this.registeredListeners.get(listener).remove(event);
     }
   }
 
-  public void unRegisterListener(Listener listener) {
+  public void unRegisterListener(StateListener listener) {
     this.registeredListeners.remove(listener);
   }
 }

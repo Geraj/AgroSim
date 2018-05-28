@@ -21,6 +21,8 @@ import dao.OperationsDAO;
 import dao.PathDAO;
 import dao.PathPointsDAO;
 import dao.PointsDAO;
+import dao.jdbc.DbException;
+import gov.nasa.worldwind.geom.Position;
 
 /**
  * Creates data for animation
@@ -29,18 +31,14 @@ import dao.PointsDAO;
  * 
  */
 public class AnimationData {
-  // public double[][] annimationmatrix;
-  /**
-   * Linked list containing latitudes
-   */
-  public LinkedList<Double> annimationLatitudeList;
 
+  /***/
+  private LinkedList<Position> animationPositions = new LinkedList<>(); 
   /**
-   * Linked list containing longitudes
-   */
-  public LinkedList<Double> annimationLongitudeList;
+ * @return the animationPositions
+ */
 
-  // public int currentCordinate=1;
+// public int currentCordinate=1;
   /**
    * Id of the current base
    */
@@ -88,10 +86,7 @@ public class AnimationData {
     // annimationmatrix=new double[3][time*precision*precision];
     Base base = baseDAO.getBaseByID(baseID);
     graph = new ModelAndGraphBuilder(baseID, operationID);
-    annimationLatitudeList = new LinkedList<Double>();
-    annimationLongitudeList = new LinkedList<Double>();
-    annimationLatitudeList.add(base.getLatitude());
-    annimationLongitudeList.add(base.getLongitude());
+    animationPositions.add(Position.fromDegrees(base.getLatitude(), base.getLongitude(), 0));    
     fillAnimationmatrix(filename);
   }
 
@@ -157,35 +152,19 @@ public class AnimationData {
    */
   private void onParcel(int parcelToWork, int timewhenleavingparcel) throws Exception {
     // add parcel stationing to matrix
-    Integer fromParcelID = parcelToWork;
-    DAOFactory df = DAOFactory.getInstance();
-    PointsDAO parcelPointsDAO = df.getPointsDao();
-    ArrayList<Points> parcelpoints = (ArrayList<Points>) parcelPointsDAO.getPointsByParcelID(
-        fromParcelID);
-    // -1 becouse the first and last parcel point in the db ar the same
-    double midlelatitude = 0;
-    double midlellongitude = 0;
-    // TODO need a beter algorithm to calculat middle position of a polygon
-    for (int i = 0; i < parcelpoints.size() - 1; i++) {
-      // calculate midle point
-      midlelatitude = midlelatitude + parcelpoints.get(i).getLatitude();
-      midlellongitude = midlellongitude + parcelpoints.get(i).getLongitude();
-    }
-    midlelatitude = midlelatitude / (parcelpoints.size() - 1);
-    midlellongitude = midlellongitude / (parcelpoints.size() - 1);
+    Position middle = parcelMiddlePosition(parcelToWork);
     //
     if (drawonParcel) {
       for (int i = lasttimeonparcel; i < timewhenleavingparcel; i++) {
         for (int j = 0; j < precision; j++) {
-          annimationLatitudeList.add(midlelatitude);
-          annimationLongitudeList.add(midlellongitude);
+          animationPositions.add(middle);
           // currentCordinate++;
         }
       }
-    } else {
     }
-
   }
+
+
 
   /**
    * Creates the cordinates for annimation
@@ -268,9 +247,8 @@ public class AnimationData {
       pathPointsToUse = expandPositions(pathPointsToUse, (timetotravel * precision) - 1);
       pathPointsToUse.add(lastPosition);
     }
-    for (int i = 0; i < pathPointsToUse.size(); i++) {
-      annimationLatitudeList.add(pathPointsToUse.get(i).getLatitude());
-      annimationLongitudeList.add(pathPointsToUse.get(i).getLongitude());
+    for (PathPoints point : pathPointsToUse) {
+      animationPositions.add(Position.fromDegrees(point.getLatitude(), point.getLongitude(), 0));
       // currentCordinate++;
     }
   }
@@ -358,5 +336,44 @@ public class AnimationData {
     points = pathPoints;
     return pathPoints;
   }
+   
+	public LinkedList<Position> getAnimationPositions() {
+		return animationPositions;
+	}
+
+	/**
+	 * @param animationPositions
+	 *            the animationPositions to set
+	 */
+	public void setAnimationPositions(LinkedList<Position> animationPositions) {
+		this.animationPositions = animationPositions;
+	}
+	
+	/**
+	 * 
+	 * Middle position of parcel
+	 * 
+	 * @param parcelToWork
+	 * @return
+	 * @throws DbException
+	 */
+	public static Position parcelMiddlePosition(int parcelToWork) throws DbException {
+		Integer fromParcelID = parcelToWork;
+		DAOFactory df = DAOFactory.getInstance();
+		PointsDAO parcelPointsDAO = df.getPointsDao();
+		ArrayList<Points> parcelpoints = (ArrayList<Points>) parcelPointsDAO.getPointsByParcelID(fromParcelID);
+		// -1 becouse the first and last parcel point in the db ar the same
+		double midlelatitude = 0;
+		double midlellongitude = 0;
+		// TODO need a beter algorithm to calculat middle position of a polygon
+		for (int i = 0; i < parcelpoints.size() - 1; i++) {
+			// calculate midle point
+			midlelatitude = midlelatitude + parcelpoints.get(i).getLatitude();
+			midlellongitude = midlellongitude + parcelpoints.get(i).getLongitude();
+		}
+		midlelatitude = midlelatitude / (parcelpoints.size() - 1);
+		midlellongitude = midlellongitude / (parcelpoints.size() - 1);
+		return Position.fromDegrees(midlelatitude, midlellongitude);
+	}
 
 }

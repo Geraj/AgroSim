@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import calculations.ModelAndGraphBuilder;
 import calculations.simulation.MachineSimulate;
 import calculations.simulation.Timer;
-import control.observer.Listener;
+import control.observer.StateListener;
 import control.observer.Observable;
 import control.observer.StateMachineEvents;
 import event.Event;
@@ -24,7 +24,7 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
   /**
    * 
    */
-  private LinkedList<Listener> listeners = new LinkedList<Listener>();
+  private LinkedList<StateListener> listeners = new LinkedList<StateListener>();
 
   /** Simulation model for infrastructure */
   private ModelAndGraphBuilder infrastructureModel;
@@ -64,26 +64,26 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
    */
   @Override
   public void notifyObservers() {
-    for (Listener listener : this.listeners) {
+    for (StateListener listener : this.listeners) {
       listener.handleEvent(StateMachineEvents.TICK, new Integer(this.lastCommonTime), this);
     }
 
   }
 
   /**
-   * @see control.observer.Observable#registerObserver(control.observer.Listener)
+   * @see control.observer.Observable#registerObserver(control.observer.StateListener)
    */
   @Override
-  public void registerObserver(Listener listener) {
+  public void registerObserver(StateListener listener) {
     this.listeners.add(listener);
 
   }
 
   /**
-   * @see control.observer.Observable#unRegisterObserver(control.observer.Listener)
+   * @see control.observer.Observable#unRegisterObserver(control.observer.StateListener)
    */
   @Override
-  public void unRegisterObserver(Listener listener) {
+  public void unRegisterObserver(StateListener listener) {
     this.listeners.remove(listener);
   }
 
@@ -93,13 +93,13 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
   public void handleSimulationEvent(Event event) {
 
 		if (event.getType().equals(EventType.TIME_CHANGE)) {
-			synchronized (timer) {
+//			synchronized (timer) {
 				boolean handled = false;
 				int retryCount = 0;
 				while (!handled) {
 					int comonTimeonMachines = -1;
 					while (comonTimeonMachines < 0 && comonTimeonMachines != MachineSimulate.time) {
-						comonTimeonMachines = timer.getCommonTimeOnMachineThreads();
+						comonTimeonMachines = timer.getCommonTimeOnMachineThreads();		
 					}
 
 					if ((comonTimeonMachines == MachineSimulate.time)) {
@@ -118,7 +118,7 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
 						//
 					}
 				}
-			}
+//			}
 		}
   }
 

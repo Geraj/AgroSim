@@ -2,7 +2,7 @@ package control.statemachine;
 
 import control.observer.EventDispatcher;
 import control.observer.StateMachineEvents;
-import control.observer.Listener;
+import control.observer.StateListener;
 import calculations.simulation.MachineSimulate;
 
 /**
@@ -10,7 +10,7 @@ import calculations.simulation.MachineSimulate;
  * @author Geraj
  * 
  */
-public class EquipmentStatController implements Listener {
+public class EquipmentStatController implements StateListener {
   /** sm */
   final StateMachine stateMachine = new StateMachine();
 
@@ -64,6 +64,7 @@ public class EquipmentStatController implements Listener {
       public void handleEvent(@SuppressWarnings("unused") Object parameter) {
         EventDispatcher.getInstance().registerListener(EquipmentStatController.this,
             StateMachineEvents.VEHICLE_MOVING_TO_PARCEL);
+        EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_STARTED, parameter, EquipmentStatController.this.equipmentName);
         System.out.println(EquipmentStatController.this.equipmentName
             + " ENTER VEHICLE STARTED STATE.");
       }
@@ -219,7 +220,7 @@ public class EquipmentStatController implements Listener {
   }
 
   /**
-   * @see control.observer.Listener#handleEvent(control.observer.StateMachineEvents, java.lang.Object, java.lang.Object)
+   * @see control.observer.StateListener#handleEvent(control.observer.StateMachineEvents, java.lang.Object, java.lang.Object)
    */
   @Override
   public void handleEvent(StateMachineEvents eventType, Object param, Object source) {

@@ -8,9 +8,9 @@ import java.util.LinkedList;
  * @author Geraj
  */
 public interface Observable {
-  public void registerObserver(Listener listener);
+  public void registerObserver(StateListener listener);
 
-  public void unRegisterObserver(Listener listener);
+  public void unRegisterObserver(StateListener listener);
 
   void notifyObservers();
 }

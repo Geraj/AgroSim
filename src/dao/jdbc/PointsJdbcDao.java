@@ -24,7 +24,7 @@ public class PointsJdbcDao implements PointsDAO {
 	public ArrayList<Points> getPointsByParcelID(int parcelID)
 			throws DbException {
 		ArrayList<Points> pointsAL = new ArrayList<Points>();
-		Connection connection = JDBCHelper.connect();;
+		Connection connection = JDBCHelper.connect();
 		try {
 			String sql = "SELECT * FROM points where ParcelID=" + parcelID;
 			PreparedStatement prest = connection.prepareStatement(sql);

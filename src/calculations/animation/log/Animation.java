@@ -124,19 +124,16 @@ public class Animation implements Runnable {
             // if that machines has cordinates to draw (its list is
             // not empty) make an annotation
 
-            if (!ads.annimationData.get(j).annimationLatitudeList.isEmpty()) {
+            if (!ads.annimationData.get(j).getAnimationPositions().isEmpty()) {
 
               arethereanyelementsinlist = true;
-              Position p = Position.fromDegrees(ads.annimationData.get(
-                  j).annimationLatitudeList.pop(), ads.annimationData.get(
-                      j).annimationLongitudeList.pop(), 0);
-
-              if (mappos.containsKey(p)) {
-                String s = mappos.get(p);
+              Position position = ads.annimationData.get(j).getAnimationPositions().pop();
+              if (mappos.containsKey(position)) {
+                String s = mappos.get(position);
                 s = s + " " + ads.machine.get(j);
-                mappos.put(p, s);
+                mappos.put(position, s);
               } else {
-                mappos.put(p, ads.machine.get(j));
+                mappos.put(position, ads.machine.get(j));
               }
             }
           }

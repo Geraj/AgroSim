@@ -6,9 +6,27 @@ package control.observer;
  * @author Geraj
  */
 public enum StateMachineEvents {
-	TICK,
-	VEHICLE_MOVING_TO_PARCEL,
-	VEHICLE_STARTED,
-	VEHICLE_STOPPED,
-	VEHICLE_WORKING;
+	/***/
+	TICK("Time changed"),
+	/***/
+	VEHICLE_MOVING_TO_PARCEL("Moving to destination"),
+	/***/
+	VEHICLE_STARTED ("Started"),
+	/***/
+	VEHICLE_STOPPED ("Stopped"),
+	/***/
+	VEHICLE_WORKING ("Working");
+	/***/
+	private String description;
+	/**Constructor 
+	 * @param description */
+	StateMachineEvents(String description) {
+		this.description = description;
+	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
 }
