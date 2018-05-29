@@ -2,6 +2,7 @@ package control.statemachine;
 
 import control.observer.EventDispatcher;
 import control.observer.StateMachineEvents;
+import event.Event;
 import control.observer.StateListener;
 import calculations.simulation.MachineSimulate;
 
@@ -43,6 +44,7 @@ public class EquipmentStatController implements StateListener {
    * @param simulatedMachine
    */
   public EquipmentStatController(MachineSimulate simulatedMachine) {
+		EventDispatcher.getInstance().registerListener(EquipmentStatController.this, StateMachineEvents.TICK);
     this.machine = simulatedMachine;
     this.equipmentName = simulatedMachine.getMachineName();
     // create the logic of execution for the states
@@ -51,6 +53,7 @@ public class EquipmentStatController implements StateListener {
     this.buildWorkingState(this.stateMachine.addState(WORKING));
     this.buildStoppedState(this.stateMachine.addState(STOPPED));
     this.start();
+    
   }
 
   /**
@@ -150,18 +153,16 @@ public class EquipmentStatController implements StateListener {
       public void handleEvent(@SuppressWarnings("unused") Object parameter) {
         EventDispatcher.getInstance().registerListener(EquipmentStatController.this,
             StateMachineEvents.VEHICLE_MOVING_TO_PARCEL);
-        EventDispatcher.getInstance().registerListener(EquipmentStatController.this,
-            StateMachineEvents.TICK);
         System.out.println("ENTER WORKING STATE.");
       }
     });
-    state.registerEvent(StateMachineEvents.TICK.toString(), new StateEventHandler() {
-      @Override
-      public void handleEvent(@SuppressWarnings("unused") Object parameter) {
-        // TODO logging or something useful
-        timeInState++;
-      }
-    });
+//    state.registerEvent(StateMachineEvents.TICK.toString(), new StateEventHandler() {
+//      @Override
+//      public void handleEvent(@SuppressWarnings("unused") Object parameter) {
+//        // TODO logging or something useful
+//        timeInState++;
+//      }
+//    });
     state.registerTransition(StateMachineEvents.VEHICLE_MOVING_TO_PARCEL.toString(), MOVING,
         new TransitionCondition() {
           public boolean isAllowed(Object parameter) {
@@ -176,8 +177,8 @@ public class EquipmentStatController implements StateListener {
       public void handleEvent(@SuppressWarnings("unused") Object parameter) {
         EventDispatcher.getInstance().unRegisterListener(EquipmentStatController.this,
             StateMachineEvents.VEHICLE_MOVING_TO_PARCEL);
-        EventDispatcher.getInstance().unRegisterListener(EquipmentStatController.this,
-            StateMachineEvents.TICK);
+//        EventDispatcher.getInstance().unRegisterListener(EquipmentStatController.this,
+//            StateMachineEvents.TICK);
         System.out.println("Vehicle: " + equipmentName + " was " + timeInState
             + " seconds @ parcell with id " + machine.getCurrentParcelName() + " in working state");
         timeInState = 0;
@@ -225,7 +226,8 @@ public class EquipmentStatController implements StateListener {
   @Override
   public void handleEvent(StateMachineEvents eventType, Object param, Object source) {
     if (StateMachineEvents.TICK == eventType) {
-      this.stateMachine.handleEvent(StateMachineEvents.TICK.toString(), param);
+      //this.stateMachine.handleEvent(StateMachineEvents.TICK.toString(), param);
+      machine.setCurrentTimeEvent((Event) param);
     } else {
       this.stateMachine.handleEvent(eventType.toString(), source);
     }

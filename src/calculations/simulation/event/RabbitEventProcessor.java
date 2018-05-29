@@ -93,32 +93,14 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
   public void handleSimulationEvent(Event event) {
 
 		if (event.getType().equals(EventType.TIME_CHANGE)) {
-//			synchronized (timer) {
-				boolean handled = false;
-				int retryCount = 0;
-				while (!handled) {
-					int comonTimeonMachines = -1;
-					while (comonTimeonMachines < 0 && comonTimeonMachines != MachineSimulate.time) {
-						comonTimeonMachines = timer.getCommonTimeOnMachineThreads();		
-					}
-
-					if ((comonTimeonMachines == MachineSimulate.time)) {
-						this.lastCommonTime = comonTimeonMachines;
-						this.notifyObservers();
-						MachineSimulate.time = comonTimeonMachines + 1;
-						handled = true;
-						// System.out.println(MachineSimulate.time);
-					} else {
-						if (retryCount > 10) {
-							Logger.getLogger(RabbitEventProcessor.class)
-									.info("Time change event not handled after 10 tries");
-							break;
-						}
-						retryCount += 1;
-						//
-					}
-				}
-//			}
+			 for (StateListener listener : this.listeners) {
+			      listener.handleEvent(StateMachineEvents.TICK, event, this);
+			 }
+			int comonTimeonMachines = -1;
+			while (comonTimeonMachines < 0 && comonTimeonMachines != MachineSimulate.time) {
+				comonTimeonMachines = timer.getCommonTimeOnMachineThreads();
+			}
+			MachineSimulate.time +=1;
 		}
   }
 

@@ -13,6 +13,7 @@ import dao.DAOFactory;
 import dao.OperationsDAO;
 import dao.ParcelDAO;
 import dao.PathDAO;
+import dao.jdbc.DbException;
 
 /**
  * Creates a graph based on DB parcels and paths data and uses Dijkstra's algorithm to calculate
@@ -71,7 +72,7 @@ public class ModelAndGraphBuilder {
    * @throws Exception
    */
   @Deprecated
-  public ModelAndGraphBuilder(int baseID, int operationID) throws Exception {
+  public ModelAndGraphBuilder(int baseID, int operationID) {
     this.baseID = baseID;
     this.operationID = operationID;
     init();
@@ -121,7 +122,7 @@ public class ModelAndGraphBuilder {
    * 
    * @throws Exception
    */
-  private void init() throws Exception {
+  private void init() {
     DAOFactory df = DAOFactory.getInstance();
     ParcelDAO parceDAO = df.getParcelDao();
     PathDAO pathDAO = df.getPathDAO();
@@ -130,9 +131,8 @@ public class ModelAndGraphBuilder {
     try {
       parcelAL = (ArrayList<Parcel>) parceDAO.getAllParcelFromBase(baseID);
       pathAL = (ArrayList<Path>) pathDAO.getAllPathofBase(baseID);
-    } catch (Exception e) {
+    } catch (DbException e ) {
       e.printStackTrace();
-      throw new Exception("Error in graph building");
     }
     n = parcelAL.size();
     n = n + 1;
@@ -166,7 +166,12 @@ public class ModelAndGraphBuilder {
       }
     }
     OperationsDAO operationsDAO = df.getOperationsDAO();
-    operation = operationsDAO.getOperationByID(operationID);
+    try {
+		operation = operationsDAO.getOperationByID(operationID);
+	} catch (DbException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     placeonparcel = new int[n];
     placeonparcel[0] = Integer.MAX_VALUE;
     for (int i = 1; i < n; i++) {
@@ -178,13 +183,23 @@ public class ModelAndGraphBuilder {
     workersonparcell = new int[n];
     parcelstatus[0] = 110;
     BaseDAO baseDAO = df.getBaseDAO();
-    base = baseDAO.getBaseByID(baseID);
+    try {
+		base = baseDAO.getBaseByID(baseID);
+	} catch (DbException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     for (int i = 1; i < n; i++) {
-      if (operationsDAO.doasePlantNeedThisOperation(parcels[i].getPlantID(), operationID)) {
-        // empty
-      } else {
-        parcelstatus[i] = 110;
-      }
+      try {
+		if (operationsDAO.doasePlantNeedThisOperation(parcels[i].getPlantID(), operationID)) {
+		    // empty
+		  } else {
+		    parcelstatus[i] = 110;
+		  }
+	} catch (DbException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 
     }
   }

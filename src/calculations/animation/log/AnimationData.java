@@ -10,7 +10,7 @@ import java.util.Random;
 import java.util.StringTokenizer;
 
 import calculations.ModelAndGraphBuilder;
-
+import calculations.animation.AnnimationHelper;
 import core.Base;
 import core.Path;
 import core.PathPoints;
@@ -208,18 +208,18 @@ public class AnimationData {
       if ((pathID == -1)) {
         // System.out.println("reverse");
         pathID = pathDAO.getPathIDbyConnectedParcelsMinimDistance(toParcelID, fromParcelID);
-        pathPoints = reverse((ArrayList<PathPoints>) pathPointsDAO.getPathPointsByPathID(pathID));
+        pathPoints = AnnimationHelper.reverse((ArrayList<PathPoints>) pathPointsDAO.getPathPointsByPathID(pathID));
       } else {
         Path p = pathDAO.getPathByID(pathID);
         // not the path from dijkstra based on length
         if (((int) graph.D[frominD][toinD]) != (int) p.getLength()) {
           // System.out.println("reverse 2");
           pathID = pathDAO.getPathIDbyConnectedParcelsMinimDistance(toParcelID, fromParcelID);
-          pathPoints = reverse(removeDuplicates(
+          pathPoints = AnnimationHelper.reverse(AnnimationHelper.removeDuplicates(
               (ArrayList<PathPoints>) pathPointsDAO.getPathPointsByPathID(pathID)));
         } else {
           // right path
-          pathPoints = removeDuplicates((ArrayList<PathPoints>) pathPointsDAO.getPathPointsByPathID(
+          pathPoints = AnnimationHelper.removeDuplicates((ArrayList<PathPoints>) pathPointsDAO.getPathPointsByPathID(
               pathID));
         }
       }
@@ -302,39 +302,6 @@ public class AnimationData {
       }
     }
     return result;
-  }
-
-  /**
-   * Travel the path backwards
-   * 
-   * @param pathPointsByPathID
-   * @return
-   */
-  private ArrayList<PathPoints> reverse(ArrayList<PathPoints> pathPointsByPathID) {
-    ArrayList<PathPoints> points = new ArrayList<PathPoints>();
-    pathPointsByPathID = removeDuplicates(pathPointsByPathID);
-    for (int i = pathPointsByPathID.size() - 1; i > -1; i--) {
-      points.add(pathPointsByPathID.get(i));
-    }
-    return points;
-  }
-
-  /**
-   * removes duplicate pathpoints
-   * 
-   * @param pathPoint
-   * @return
-   */
-  private ArrayList<PathPoints> removeDuplicates(ArrayList<PathPoints> pathPoints) {
-    for (int i = 0; i < pathPoints.size() - 1; i++) {
-      if ((pathPoints.get(i).getLatitude() == pathPoints.get(i + 1).getLatitude())
-          && (pathPoints.get(i).getLongitude() == pathPoints.get(i + 1).getLongitude())) {
-        pathPoints.remove(i);
-      }
-    }
-    ArrayList<PathPoints> points = new ArrayList<PathPoints>();
-    points = pathPoints;
-    return pathPoints;
   }
    
 	public LinkedList<Position> getAnimationPositions() {

@@ -190,7 +190,7 @@ public class ApplicationMap {
 			});
 
 			this.pack();
-			AnimationStateHandler animationStateHandler =  new AnimationStateHandler(this.wwjPanel.getWwd());
+			AnimationStateHandler animationStateHandler =  new AnimationStateHandler(this.wwjPanel.getWwd(), baseID);
 			EventDispatcher.getInstance().registerListener(animationStateHandler,
 					StateMachineEvents.VEHICLE_STARTED);
 			EventDispatcher.getInstance().registerListener(animationStateHandler,

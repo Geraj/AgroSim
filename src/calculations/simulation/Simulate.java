@@ -143,15 +143,8 @@ public class Simulate implements Runnable {
       n = machinesToUseForOperation.size();
       if (n > 0) {
         // initiating machine simulation
-        Semaphore sem = new Semaphore(1, true);
-        Semaphore sem2 = new Semaphore(1, true);
         MachineSimulate machine[] = new MachineSimulate[n];
-        Thread machines[] = new Thread[n];
         Timer timer = new Timer(n);
-        //TimerTick t = TimerTick.getInstance(graph, timer);
-        //t.registerObserver(EventDispatcher.getInstance());
-        //Thread tick = new Thread(t);
-        //tick.start();
         RabbitEventProcessor eventProcessor = new RabbitEventProcessor(graph, timer);
         eventProcessor.registerObserver(EventDispatcher.getInstance());
         try {
@@ -167,20 +160,16 @@ public class Simulate implements Runnable {
         }
         // simulations++;
         for (int i = 0; i < n; i++) {
-          machine[i] = new MachineSimulate(graph, machinesToUseForOperation.get(i), timer, i, sem,
-              sem2);
-          // MachineSimulate s=new
-          // MachineSimulate(graph,machinestouseAL.get(i).getSpeed(),machinestouseAL.get(i).getWorkspeed(),machinestouseAL.get(i).getID(),timer,i,sem,sem2);
-          machines[i] = new Thread(machine[i]);
+          machine[i] = new MachineSimulate(graph, machinesToUseForOperation.get(i), timer, i);
+          //machines[i] = new Thread(machine[i]);
           EquipmentStatController ic = new EquipmentStatController(machine[i]);
-          // t.registerObserver(ic);
-          // ic.start();
+          
         }
-        for (int i = 0; i < n; i++) {
-          machines[i].start();
-        }
+//        for (int i = 0; i < n; i++) {
+//          machines[i].start();
+//        }
         for (int i = 0; i < n; i++)
-          while (machines[i].isAlive()) {
+          while (!machine[i].isFinished()) {
         	  try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
