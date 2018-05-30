@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
 
@@ -15,6 +17,7 @@ import calculations.ModelAndGraphBuilder;
 
 import core.Machines;
 import event.Event;
+import event.EventType;
 
 /**
  * Simulates a machine
@@ -27,10 +30,6 @@ public class MachineSimulate /* implements Runnable */ {
 	/***/
 	private ModelAndGraphBuilder graph;
 
-	/**
-	 * machine simulation global time
-	 */
-	public static int time;
 	private int speed;
 	/**
 	 * time spent on road
@@ -40,7 +39,10 @@ public class MachineSimulate /* implements Runnable */ {
 	 * id of the current parcel
 	 */
 	private int currentparcel;
-	private double timeperHA;
+	/** actual work speed*/
+	private double timePerHA;
+	/**unaltered value of vehicle work speed*/
+	private double originalTimePerHA;
 	private String machineName;
 	private Timer myTimer;
 	private int myTimerID;
@@ -53,6 +55,7 @@ public class MachineSimulate /* implements Runnable */ {
 	
 	private boolean finished = false;
 	private ArrayList<Integer> lastPath = new ArrayList<>();
+	private List<EventType> eventModifyers = new LinkedList<EventType>();
 	/**
 	 * 
 	 * @param graph
@@ -65,8 +68,8 @@ public class MachineSimulate /* implements Runnable */ {
 	 */
 	public MachineSimulate(ModelAndGraphBuilder graph, Machines currentMachine, Timer myTimer, int timerID) {
 		this.graph = graph;
-		this.speed = currentMachine.getSpeed();
-		this.timeperHA = currentMachine.getWorkspeed();
+		this.speed = currentMachine.getSpeed()/4;
+		this.timePerHA = currentMachine.getWorkspeed();
 		this.machineName = currentMachine.getID();
 		this.myTimer = myTimer;
 		this.myTimerID = timerID;
@@ -145,21 +148,21 @@ public class MachineSimulate /* implements Runnable */ {
 	 * Start working
 	 */
 	public void doWork() {
-		double haperminute = timeperHA / 60;
+		double haperminute = timePerHA / 60;
 		// EventDispatcher.getInstance().fireEvent(Events.VEHICLE_STARTED, null,
 		// this.machineName);
 		// while (!isReady()) {
 
 		// no more work here
-		if ((graph.parcelstatus[currentparcel] >= 100) && isBehind()) {
+		if ((graph.parcelstatus[currentparcel] >= 100)) {
 //			myTimer.timeOnMachineThreads[myTimerID] = time;
 			// not heading tovards a complete parcel (base)
-			if (time > onroad) {
+			if (myTimer.getTime() > onroad) {
 				int work = getparcelToWork();// get the nearest uncompleted
 												// parcel with free place
 				if (work != 0) {
 					if (currentparcel != 0) {// dont show if at base
-						writetofile(" " + convertMinutes(time) + "Completed:" + graph.parcels[currentparcel].getName()
+						writetofile(" " + convertMinutes(myTimer.getTime()) + "Completed:" + graph.parcels[currentparcel].getName()
 								+ " parcel\n");
 					}
 					// critical code for reserving a place on the parcel
@@ -168,7 +171,7 @@ public class MachineSimulate /* implements Runnable */ {
 						distancetraveld += distanceToParcel;
 						int timetotravel = (int) (distanceToParcel * 60 / ((speed * myrand() * 1000)) + 1);// m/minute
 																											// +1
-						onroad = time + timetotravel;
+						onroad = myTimer.getTime() + timetotravel;
 						graph.workersonparcell[currentparcel] -= 1;
 						graph.workersonparcell[work] += 1;
 						writetofile(addpathtolog(work, currentparcel, timetotravel));
@@ -182,10 +185,10 @@ public class MachineSimulate /* implements Runnable */ {
 			}
 		} else {
 			// work a minute if tick is 1min in plus
-			if ((time >= onroad) && isBehind() && (currentparcel != 0) && (graph.parcelstatus[currentparcel] < 100)) {
+			if ((myTimer.getTime() >= onroad) && (currentparcel != 0) && (graph.parcelstatus[currentparcel] < 100)) {
 				int minutesToBase = (int) (graph.D[currentparcel][0] * 60 / ((speed * 1000)) + 1);// TODO test
 																									// this
-				if ((((time % 599 == 1)) || (((time + minutesToBase) % 599 == 1))) && (time != 1)) {// next day
+				if ((((myTimer.getTime() % 599 == 1)) || (((myTimer.getTime() + minutesToBase) % 599 == 1))) && (myTimer.getTime() != 1)) {// next day
 					graph.workersonparcell[currentparcel] -= 1;
 					returnToBase(true);
 					currentparcel = 0;
@@ -209,7 +212,7 @@ public class MachineSimulate /* implements Runnable */ {
 							areaWorked += hapm;
 							double d = hapm * 100 / graph.parcels[currentparcel].getArea() * 100;
 							int p = (int) d;
-							writetofile(convertMinutes(time) + "Completed on " + graph.parcels[currentparcel].getName()
+							writetofile(convertMinutes(myTimer.getTime()) + "Completed on " + graph.parcels[currentparcel].getName()
 									+ " %" + p / 100.0 + "\n");
 							EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_WORKING,
 									new WorkingOnParcel(graph.parcels[currentparcel].getID(),
@@ -221,7 +224,7 @@ public class MachineSimulate /* implements Runnable */ {
 							graph.parcelstatus[currentparcel] = 100;
 							double d = remaining * 100;
 							int p = (int) d;
-							writetofile(convertMinutes(time) + "Added to " + graph.parcels[currentparcel].getName()
+							writetofile(convertMinutes(myTimer.getTime()) + "Added to " + graph.parcels[currentparcel].getName()
 									+ " %" + p / 100.0 + "\n");
 							EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_WORKING,
 									new WorkingOnParcel(graph.parcels[currentparcel].getID(),
@@ -232,8 +235,8 @@ public class MachineSimulate /* implements Runnable */ {
 				}
 			}
 			// travel a minute
-			if ((time < onroad) && isBehind()) {
-				if ((time % 599 == 1) && (time != 1)) {// next day
+			if ((myTimer.getTime() < onroad) ) {
+				if ((myTimer.getTime() % 599 == 1) && (myTimer.getTime() != 1)) {// next day
 					// System.out.println(machineName+" "+convertMinutes(time)+":work is ower for
 					// today:)");
 					graph.workersonparcell[currentparcel] -= 1;
@@ -250,7 +253,7 @@ public class MachineSimulate /* implements Runnable */ {
 		}
 
 		// }
-		if (isReady() && MachineSimulate.time > onroad) {
+		if (isReady() && myTimer.getTime() > onroad) {
 			try {
 
 				// System.out.println(machineName+":thread ready");
@@ -280,17 +283,13 @@ public class MachineSimulate /* implements Runnable */ {
 		return finished ;
 	}
 
-	private boolean isBehind() {	
-		return true;/*myTimer.timeOnMachineThreads[myTimerID] < time;*/
-	}
-
 	/**
 	 * Return to base and log the path.
 	 */
 	private void returnToBase() {
 		distancetraveld += graph.D[currentparcel][0];
 		int timetotravel = (int) (graph.D[currentparcel][0] * 60 / ((speed * myrand() * 1000)) + 1);
-		onroad = timetotravel + time;
+		onroad = timetotravel + myTimer.getTime();
 		writetofile(addpathtolog(0, currentparcel, timetotravel));
 		EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_MOVING_TO_PARCEL,
 				new MovingToParcel(graph.parcels[currentparcel].getID(), 0, timetotravel, lastPath), this.machineName);
@@ -307,7 +306,7 @@ public class MachineSimulate /* implements Runnable */ {
 		} else {
 			timetotravel = (int) (graph.D[currentparcel][0] * 60 / ((speed * myrand() * 1000)) + 1);
 		}
-		onroad = timetotravel + time;
+		onroad = timetotravel + myTimer.getTime();
 		writetofile(addpathtolog(0, currentparcel, timetotravel));
 	}
 
@@ -328,6 +327,12 @@ public class MachineSimulate /* implements Runnable */ {
 
 	}
 
+	/**
+	 * 
+	 * @param from
+	 * @param to
+	 * @return
+	 */
 	private int getPreviousPoint(int from, int to) {
 		return graph.P[from][to];
 	}
@@ -343,7 +348,7 @@ public class MachineSimulate /* implements Runnable */ {
 	private String addpathtolog(int newparcel, int oldparcel, int timetotravel) {
 		lastPath = new ArrayList<>();
 		StringBuilder log = new StringBuilder();
-		log.append(" " + convertMinutes(time) + "seletced:" + graph.parcels[newparcel].getName() + " ,time when there:"
+		log.append(" " + convertMinutes(myTimer.getTime()) + "seletced:" + graph.parcels[newparcel].getName() + " ,time when there:"
 				+ convertMinutes(onroad) + "time to travel:" + timetotravel + "\n");
 		writetoanim("Select " + graph.parcels[newparcel].getID() + " " + onroad + " " + timetotravel + "\n");
 		ArrayList<Integer> path = new ArrayList<Integer>();
@@ -433,8 +438,23 @@ public class MachineSimulate /* implements Runnable */ {
 	 * 
 	 * @param param
 	 */
-	public void setCurrentTimeEvent(Event param) {
-		doWork();
-		myTimer.getTimeOnMachineThreads()[myTimerID] = (int) param.getTimeStamp();
+	public void processEvent(Event param) {
+		if (EventType.TIME_CHANGE.equals(param.getType())) {
+			doWork();
+			myTimer.getTimeOnMachineThreads()[myTimerID] = (int) param.getTimeStamp();
+		} else if (EventType.RAIN.equals(param.getType()) || EventType.BREAKDOWN.equals(param.getType())) {
+			if (eventModifyers.contains(param.getType())) {
+				eventModifyers.remove(param.getType());
+				timePerHA = timePerHA * 2;
+			} else {
+				timePerHA = timePerHA / 2;
+				eventModifyers.add(param.getType());
+			}
+		} else if (EventType.MIRACLE.equals(param.getType())) {
+			for (int i = 1; i< graph.parcelstatus.length;i++) {
+				graph.parcelstatus[i] += 5;
+			}
+		}
+		
 	}
 }

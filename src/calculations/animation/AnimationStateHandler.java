@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import appmap.ApplicationMap;
 import calculations.ModelAndGraphBuilder;
@@ -15,6 +16,8 @@ import control.statemachine.helper.WorkingOnParcel;
 import core.PathPoints;
 
 import dao.jdbc.DbException;
+import event.Event;
+import event.EventType;
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.AnnotationLayer;
@@ -47,6 +50,8 @@ public class AnimationStateHandler implements StateListener {
 		graph = new ModelAndGraphBuilder(baseID, 3);
 	}
 
+	/**Active simulation speed modifier events*/
+	private List<EventType> eventModifyers = new LinkedList<EventType>();
 	/**
 	 * Handle State machine event
 	 * 
@@ -54,23 +59,34 @@ public class AnimationStateHandler implements StateListener {
 	 * @param message
 	 * @param source
 	 */
+	@Override
 	public void handleEvent(StateMachineEvents eventType, Object message, Object source) {
-		if (StateMachineEvents.TICK.equals(eventType)) {
-			for (Object object : vehiclePointsToTravelLayer.keySet()) {
-				if (!vehiclePointsToTravelLayer.get(object).isEmpty()) {
-					Position position = vehiclePointsToTravelLayer.get(object).removeFirst();
-					AnnotationLayer layer = vehicleLayer.get(object);
-					layer.removeAllAnnotations();
-					wwd.getModel().getLayers().remove(layer);
-					if (position != null) {
-						StringBuilder annotationMessageBuilder = new StringBuilder();
-						annotationMessageBuilder.append(object).append(" ")
-								.append(StateMachineEvents.VEHICLE_MOVING_TO_PARCEL);
-						layer.addAnnotation(drawLayerOnPosition(annotationMessageBuilder, position));
-						wwd.getModel().getLayers().add(layer);
+		if (StateMachineEvents.SIMULATION_EVENT.equals(eventType)) {
+			if (EventType.TIME_CHANGE.equals(((Event) message).getType())) {
+				for (Object object : vehiclePointsToTravelLayer.keySet()) {
+					if (!vehiclePointsToTravelLayer.get(object).isEmpty()) {
+						Position position = vehiclePointsToTravelLayer.get(object).removeFirst();
+						AnnotationLayer layer = vehicleLayer.get(object);
+						layer.removeAllAnnotations();
+						wwd.getModel().getLayers().remove(layer);
+						if (position != null) {
+							StringBuilder annotationMessageBuilder = new StringBuilder();
+							annotationMessageBuilder.append(object).append(" ")
+									.append(StateMachineEvents.VEHICLE_MOVING_TO_PARCEL.getDescription());
+							layer.addAnnotation(drawLayerOnPosition(annotationMessageBuilder, position));
+							wwd.getModel().getLayers().add(layer);
+						}
 					}
 				}
+			} else if (EventType.RAIN.equals(((Event) message).getType()) || EventType.BREAKDOWN.equals(((Event) message).getType())) {
+				if (eventModifyers.contains(((Event) message).getType())) {
+					eventModifyers.remove(((Event) message).getType());
+				} else {
+					eventModifyers.add(((Event) message).getType());
+				}
+
 			}
+
 		} else {
 			AnnotationLayer layer = null;
 			if (vehicleLayer.get(source) != null) {
@@ -82,6 +98,9 @@ public class AnimationStateHandler implements StateListener {
 			}
 
 			StringBuilder annotationMessageBuilder = new StringBuilder();
+			if (!eventModifyers.isEmpty()) {
+				annotationMessageBuilder.append("[" + eventModifyers.size() +"]");
+			}
 			Position position = null;
 			if (StateMachineEvents.VEHICLE_STARTED.equals(eventType)) {
 				vehiclePointsToTravelLayer.remove(source);
@@ -89,19 +108,16 @@ public class AnimationStateHandler implements StateListener {
 				annotationMessageBuilder.append(source + eventType.getDescription());
 			} else if (StateMachineEvents.VEHICLE_STOPPED.equals(eventType)) {
 				vehiclePointsToTravelLayer.remove(source);
-			} else if (StateMachineEvents.VEHICLE_WORKING.equals(eventType)) {
+			} else if (StateMachineEvents.VEHICLE_WORKING.equals(eventType)) {				
 				vehiclePointsToTravelLayer.remove(source);
-				try {
-					WorkingOnParcel messageData = (WorkingOnParcel) message;
-					position = AnimationData.parcelMiddlePosition(messageData.getParcelId());
-					annotationMessageBuilder.append(source + " " + eventType.getDescription())
-							.append(" complete " + String.format("%,.2f", messageData.getComplete()) + " %");
-				} catch (DbException e) {
-					e.printStackTrace();
-				}
+				WorkingOnParcel messageData = (WorkingOnParcel) message;
+				position = AnnimationHelper.parcelMiddlePosition(messageData.getParcelId());
+				annotationMessageBuilder.append(source + " " + eventType.getDescription())
+						.append(" complete " + String.format("%,.2f", messageData.getComplete()) + " %");
 			} else if (StateMachineEvents.VEHICLE_MOVING_TO_PARCEL.equals(eventType)) {
 				MovingToParcel messageData = (MovingToParcel) message;
-				ArrayList<PathPoints> points = AnnimationHelper.createCordinates(messageData.getPathToTravel(), graph);
+				LinkedList<PathPoints> points = AnnimationHelper.createCordinates(messageData.getPathToTravel(), graph);							
+				points = AnnimationHelper.expandPositions(points, messageData.getTimeToTravel());
 				LinkedList<Position> pathPositions = new LinkedList<>();
 				for (PathPoints point : points) {
 					pathPositions.add(Position.fromDegrees(point.getLatitude(), point.getLongitude()));

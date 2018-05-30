@@ -15,6 +15,8 @@ import org.apache.log4j.Logger;
 import calculations.ModelAndGraphBuilder;
 import calculations.simulation.event.RabbitEventProcessor;
 import control.observer.EventDispatcher;
+import control.observer.StateListener;
+import control.observer.StateMachineEvents;
 import control.statemachine.EquipmentStatController;
 import core.Machines;
 import core.Operations;
@@ -145,29 +147,24 @@ public class Simulate implements Runnable {
         // initiating machine simulation
         MachineSimulate machine[] = new MachineSimulate[n];
         Timer timer = new Timer(n);
-        RabbitEventProcessor eventProcessor = new RabbitEventProcessor(graph, timer);
+        EventDispatcher.getInstance().registerListener(timer, StateMachineEvents.SIMULATION_EVENT);
+        RabbitEventProcessor eventProcessor = new RabbitEventProcessor();
         eventProcessor.registerObserver(EventDispatcher.getInstance());
+        
         try {
           JOptionPane.showMessageDialog(frame, "Simulation started "
               + dfFactory.getBaseDAO().getBaseByID(baseID).getName() + "for "
-              + currentOperation.getName() + ", please wait");
+              + currentOperation.getName() + ", start map for event display");
         } catch (HeadlessException e) {
-          // TODO Auto-generated catch block
           e.printStackTrace();
         } catch (DbException e) {
-          // TODO Auto-generated catch block
            e.printStackTrace();
         }
-        // simulations++;
         for (int i = 0; i < n; i++) {
           machine[i] = new MachineSimulate(graph, machinesToUseForOperation.get(i), timer, i);
-          //machines[i] = new Thread(machine[i]);
           EquipmentStatController ic = new EquipmentStatController(machine[i]);
           
         }
-//        for (int i = 0; i < n; i++) {
-//          machines[i].start();
-//        }
         for (int i = 0; i < n; i++)
           while (!machine[i].isFinished()) {
         	  try {

@@ -46,6 +46,11 @@ public class EventDispatcher implements EventProducer, StateListener {
     this.fireEvent(eventType, message, source);
   }
 
+  /**
+   * 
+   * @param listener
+   * @param event
+   */
   public void registerListener(StateListener listener, StateMachineEvents event) {
     if (this.registeredListeners.containsKey(listener)) {
       this.registeredListeners.get(listener).add(event);
@@ -56,12 +61,21 @@ public class EventDispatcher implements EventProducer, StateListener {
     }
   }
 
+  /**
+   * 
+   * @param listener
+   * @param event
+   */
   public void unRegisterListener(StateListener listener, StateMachineEvents event) {
     if (this.registeredListeners.keySet().contains(listener)) {
       this.registeredListeners.get(listener).remove(event);
     }
   }
 
+  /**
+   * 
+   * @param listener
+   */
   public void unRegisterListener(StateListener listener) {
     this.registeredListeners.remove(listener);
   }

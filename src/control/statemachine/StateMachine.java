@@ -121,7 +121,7 @@ public class StateMachine {
 
       // execute handling
       if (handler != null) {
-        this.logDebug("execHandler p(" + parameter + ")");
+        this.logDebug("execHandler param(" + parameter + ")");
         try {
           handler.handleEvent(parameter);
         } catch (Exception e) {
@@ -159,7 +159,7 @@ public class StateMachine {
    * @return true if the event was handled
    */
   public boolean handleEvent(String event, Object parameter) {
-    this.logDebug(">>'" + event + "' s[" + this.currentState + "] p(" + parameter + ")");
+    this.logDebug(">>'" + event + "' s[" + this.currentState + "] param(" + parameter + ")");
 
     boolean handled = false;
     String handlerState = null;
@@ -169,13 +169,13 @@ public class StateMachine {
     }
 
     if (handled) {
-      this.logDebug("<<'" + event + "' s[" + handlerState + "] p(" + parameter + ")");
+      this.logDebug("<<'" + event + "' s[" + handlerState + "] param(" + parameter + ")");
     } else {
       // try to handle the event in the catch all state
       handled = this.getState(CATCH_ALL_STATE).handleEvent(event, parameter);
 
       if (handled) {
-        this.logDebug("<<'" + event + "' s[CATCH_ALL_STATE] p(" + parameter + ")");
+        this.logDebug("<<'" + event + "' s[CATCH_ALL_STATE] param(" + parameter + ")");
       } else {
         this.logDebug("<<'" + event + "' s[] p(" + parameter + ")");
       }

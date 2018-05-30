@@ -1,16 +1,26 @@
 package calculations.simulation;
 
+import control.observer.StateListener;
+import control.observer.StateMachineEvents;
+import event.Event;
+import event.EventType;
+
 /**
  * Inspects the time on each machine thread
  * 
  * @author Gergely Meszaros
  *
  */
-public class Timer {
+public class Timer implements StateListener {
 	private int[] timeOnMachineThreads;
 
 	private int machinecount;
 
+	/**
+	 * machine simulation global time in minutes
+	 */
+	private int time;
+	
 	/**
 	 * Constructs a new instance.
 	 * 
@@ -45,6 +55,26 @@ public class Timer {
 	 */
 	public int[] getTimeOnMachineThreads() {
 		return timeOnMachineThreads;
+	}
+
+	/**
+	 * control.observer.StateListener
+	 */
+	public void handleEvent(StateMachineEvents eventType, Object message, Object source) {
+		if (StateMachineEvents.SIMULATION_EVENT.equals(eventType)){
+			if (EventType.TIME_CHANGE.equals(((Event) message).getType())) {
+				if (getCommonTimeOnMachineThreads()>0) {
+					time ++;
+				}
+			}
+		}		
+	}
+	
+	/**
+	 * @return the time
+	 */
+	public int getTime() {
+		return time;
 	}
 
 }

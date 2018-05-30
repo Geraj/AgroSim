@@ -6,8 +6,8 @@ package control.observer;
  * @author Geraj
  */
 public enum StateMachineEvents {
-	/***/
-	TICK("Time changed"),
+	/** Simulation event which may be handled by an equipment */
+	SIMULATION_EVENT("Simulation event"),
 	/***/
 	VEHICLE_MOVING_TO_PARCEL("Moving to destination"),
 	/***/

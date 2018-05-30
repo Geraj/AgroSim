@@ -1,6 +1,8 @@
 
 package calculations.simulation.event;
 
+import static org.junit.Assume.assumeNoException;
+
 import java.io.IOException;
 
 import com.rabbitmq.client.AMQP;
@@ -39,7 +41,11 @@ public class RabbitMessageConsumer extends DefaultConsumer{
       throws IOException {        
     Event o = EventSerializationUtil.createEventFromByteArray(body);
     System.out.println(" [x] Received '" + o + "'");
+    try {
     processor.handleSimulationEvent(o);
+    } catch (Exception e) {
+    	e.printStackTrace();
+    }
   }
 
 }

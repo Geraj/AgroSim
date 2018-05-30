@@ -26,15 +26,6 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
    */
   private LinkedList<StateListener> listeners = new LinkedList<StateListener>();
 
-  /** Simulation model for infrastructure */
-  private ModelAndGraphBuilder infrastructureModel;
-
-  /** Object following the time on different simulation threads */
-  private Timer timer;
-
-  /** Last common time */
-  private int lastCommonTime;
-
   /**
    * Connector to rabbitmq exchange
    */
@@ -46,9 +37,7 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
    * 
    * @param t
    */
-  public RabbitEventProcessor(ModelAndGraphBuilder infrastructureModel, Timer t) {
-    this.infrastructureModel = infrastructureModel;
-    this.timer = t;
+  public RabbitEventProcessor() {
     rabbitExchangeConnector.connect(this);
   }
 
@@ -64,9 +53,9 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
    */
   @Override
   public void notifyObservers() {
-    for (StateListener listener : this.listeners) {
-      listener.handleEvent(StateMachineEvents.TICK, new Integer(this.lastCommonTime), this);
-    }
+//    for (StateListener listener : this.listeners) {
+//      listener.handleEvent(StateMachineEvents.SIMULATION_EVENT, new Integer(this.lastCommonTime), this);
+//    }
 
   }
 
@@ -90,18 +79,10 @@ public class RabbitEventProcessor implements Observable, EventProcessor {
   /**
    * @see calculations.simulation.event.EventProcessor#handleSimulationEvent(event.Event)
    */
-  public void handleSimulationEvent(Event event) {
-
-		if (event.getType().equals(EventType.TIME_CHANGE)) {
-			 for (StateListener listener : this.listeners) {
-			      listener.handleEvent(StateMachineEvents.TICK, event, this);
-			 }
-			int comonTimeonMachines = -1;
-			while (comonTimeonMachines < 0 && comonTimeonMachines != MachineSimulate.time) {
-				comonTimeonMachines = timer.getCommonTimeOnMachineThreads();
-			}
-			MachineSimulate.time +=1;
+	public void handleSimulationEvent(Event event) {
+		for (StateListener listener : this.listeners) {
+			listener.handleEvent(StateMachineEvents.SIMULATION_EVENT, event, this);
 		}
-  }
+	}
 
 }

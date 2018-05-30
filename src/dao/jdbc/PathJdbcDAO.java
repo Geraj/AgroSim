@@ -249,7 +249,7 @@ public class PathJdbcDAO implements PathDAO{
 	@Override
 	public int getPathIDbyConnectedParcelsMinimDistance(int parcelId1,
 			int parcelId2) throws DbException {
-		Connection connection = JDBCHelper.connect();;
+		Connection connection = JDBCHelper.connect();
 		int id =-1;
 		try {
 			String sql = "SELECT ID FROM path WHERE parcelFrom="+parcelId1+" and parcelTO="+parcelId2+" order by Length limit 1";

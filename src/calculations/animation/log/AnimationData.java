@@ -152,7 +152,7 @@ public class AnimationData {
    */
   private void onParcel(int parcelToWork, int timewhenleavingparcel) throws Exception {
     // add parcel stationing to matrix
-    Position middle = parcelMiddlePosition(parcelToWork);
+    Position middle = AnnimationHelper.parcelMiddlePosition(parcelToWork);
     //
     if (drawonParcel) {
       for (int i = lasttimeonparcel; i < timewhenleavingparcel; i++) {
@@ -182,7 +182,7 @@ public class AnimationData {
     DAOFactory daoFactory = DAOFactory.getInstance();
     PathDAO pathDAO = daoFactory.getPathDAO();
     PathPointsDAO pathPointsDAO = daoFactory.getPathPointsDAO();
-    ArrayList<PathPoints> pathPointsToUse = new ArrayList<PathPoints>();
+    LinkedList<PathPoints> pathPointsToUse = new LinkedList<PathPoints>();
     ArrayList<PathPoints> pathPoints = new ArrayList<PathPoints>();
     while (count <= pathlength) {
       int fromParcelID = pathArrayList.get(count - 2);
@@ -239,12 +239,12 @@ public class AnimationData {
    * @param timewhenthere
    * @param timetotravel
    */
-  private void buildMatrix(ArrayList<PathPoints> pathPointsToUse, Integer timewhenthere,
+  private void buildMatrix(LinkedList<PathPoints> pathPointsToUse, Integer timewhenthere,
       Integer timetotravel) {
     int size = pathPointsToUse.size();
     if (size < (timetotravel * precision)) {
       PathPoints lastPosition = pathPointsToUse.get(pathPointsToUse.size() - 1);
-      pathPointsToUse = expandPositions(pathPointsToUse, (timetotravel * precision) - 1);
+      pathPointsToUse = AnnimationHelper.expandPositions(pathPointsToUse, (timetotravel * precision) - 1);
       pathPointsToUse.add(lastPosition);
     }
     for (PathPoints point : pathPointsToUse) {
@@ -253,56 +253,7 @@ public class AnimationData {
     }
   }
 
-  /**
-   * Creates howmany points on a path from a given list of pathpoins
-   * 
-   * @param originalPositionsAL
-   * @param howmany
-   * @return
-   */
-  public ArrayList<PathPoints> expandPositions(ArrayList<PathPoints> originalPositionsAL,
-      int howmany) {
 
-    int sizeoforiginal = originalPositionsAL.size();
-    ArrayList<PathPoints> result = new ArrayList<PathPoints>();
-    // reduce number of points
-    if (howmany < sizeoforiginal) {
-      int needtoremove = originalPositionsAL.size() - howmany;
-      for (int i = 1; i <= needtoremove; i++) {
-        originalPositionsAL.remove(i);
-      }
-      result = originalPositionsAL;
-    } // increase number of points
-    else {
-      int multi = howmany / (sizeoforiginal - 1);// multi-how many points
-      // to insert between
-      // each originalpoint
-      for (int i = 0; i < sizeoforiginal - 1; i++) {
-        for (int j = 0; j < multi; j++) {
-
-          double jj = j;
-          double multiDouble = multi;
-          PathPoints p = new PathPoints((originalPositionsAL.get(i).getLatitude() + (jj
-              / multiDouble) * (originalPositionsAL.get(i + 1).getLatitude()
-                  - originalPositionsAL.get(i).getLatitude())), (originalPositionsAL.get(
-                      i).getLongitude() + (jj / multiDouble) * (originalPositionsAL.get(i
-                          + 1).getLongitude() - originalPositionsAL.get(i).getLongitude())));
-          result.add(p);
-
-        }
-      }
-      Random r = new Random();
-      while (result.size() < howmany) {// leftover points
-        int pos = r.nextInt(result.size() - 1);
-        PathPoints p1 = result.get(pos);
-        PathPoints p2 = result.get(pos + 1);
-        PathPoints newPos = new PathPoints((p1.getLatitude() + p2.getLatitude()) / 2,
-            (p1.getLongitude() + p2.getLongitude()) / 2);
-        result.add(pos + 1, newPos);
-      }
-    }
-    return result;
-  }
    
 	public LinkedList<Position> getAnimationPositions() {
 		return animationPositions;
@@ -314,33 +265,6 @@ public class AnimationData {
 	 */
 	public void setAnimationPositions(LinkedList<Position> animationPositions) {
 		this.animationPositions = animationPositions;
-	}
-	
-	/**
-	 * 
-	 * Middle position of parcel
-	 * 
-	 * @param parcelToWork
-	 * @return
-	 * @throws DbException
-	 */
-	public static Position parcelMiddlePosition(int parcelToWork) throws DbException {
-		Integer fromParcelID = parcelToWork;
-		DAOFactory df = DAOFactory.getInstance();
-		PointsDAO parcelPointsDAO = df.getPointsDao();
-		ArrayList<Points> parcelpoints = (ArrayList<Points>) parcelPointsDAO.getPointsByParcelID(fromParcelID);
-		// -1 becouse the first and last parcel point in the db ar the same
-		double midlelatitude = 0;
-		double midlellongitude = 0;
-		// TODO need a beter algorithm to calculat middle position of a polygon
-		for (int i = 0; i < parcelpoints.size() - 1; i++) {
-			// calculate midle point
-			midlelatitude = midlelatitude + parcelpoints.get(i).getLatitude();
-			midlellongitude = midlellongitude + parcelpoints.get(i).getLongitude();
-		}
-		midlelatitude = midlelatitude / (parcelpoints.size() - 1);
-		midlellongitude = midlellongitude / (parcelpoints.size() - 1);
-		return Position.fromDegrees(midlelatitude, midlellongitude);
-	}
+	}	
 
 }

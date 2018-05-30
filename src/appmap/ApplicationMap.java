@@ -200,7 +200,7 @@ public class ApplicationMap {
 			EventDispatcher.getInstance().registerListener(animationStateHandler,
 					StateMachineEvents.VEHICLE_WORKING);
 			EventDispatcher.getInstance().registerListener(animationStateHandler,
-					StateMachineEvents.TICK);
+					StateMachineEvents.SIMULATION_EVENT);
 
 			// Center the application on the screen.
 			WWUtil.alignComponent(null, this, AVKey.CENTER);
