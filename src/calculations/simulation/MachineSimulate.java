@@ -267,9 +267,10 @@ public class MachineSimulate /* implements Runnable */ {
 				out.write("\n Area:" + a1 / 100.0 + "(Price:" + p / 100.0 + ")" + " distance:" + this.distancetraveld);
 				out.close();
 				outanim.close();
+				finished = true;
 				EventDispatcher.getInstance().fireEvent(StateMachineEvents.VEHICLE_STOPPED, this.currentparcel,
 						this.machineName);
-				finished = true;
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

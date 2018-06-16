@@ -177,8 +177,10 @@ public class AnnimationHelper {
 	    // reduce number of points
 	    if (howmany < sizeoforiginal) {
 	      int needtoremove = originalPositionsAL.size() - howmany;
-	      for (int i = 1; i <= needtoremove; i++) {
-	        originalPositionsAL.remove(i);
+	      for (int i = 1; i < needtoremove; i++) {
+	    	  if (originalPositionsAL.size()<i) {
+	    		  originalPositionsAL.remove(i);
+	    	  }
 	      }
 	      result = originalPositionsAL;
 	    } // increase number of points

@@ -162,8 +162,7 @@ public class Simulate implements Runnable {
         }
         for (int i = 0; i < n; i++) {
           machine[i] = new MachineSimulate(graph, machinesToUseForOperation.get(i), timer, i);
-          EquipmentStatController ic = new EquipmentStatController(machine[i]);
-          
+          EquipmentStatController ic = new EquipmentStatController(machine[i]);          
         }
         for (int i = 0; i < n; i++)
           while (!machine[i].isFinished()) {
